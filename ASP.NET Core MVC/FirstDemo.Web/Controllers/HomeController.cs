@@ -13,8 +13,9 @@ namespace FirstDemo.Web.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int id)
         {
+            ViewData["id"] = id;
             return View();
         }
 
