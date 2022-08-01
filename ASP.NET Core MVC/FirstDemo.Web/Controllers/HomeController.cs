@@ -8,12 +8,21 @@ namespace FirstDemo.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        private readonly ICourseModel _courseModel;
+        private static ICourseModel _courseModel;
 
         public HomeController(ILogger<HomeController> logger,ICourseModel courseModel)
         {
             _logger = logger;
-            _courseModel = courseModel;
+
+            if (_courseModel != null)
+            {
+                if (courseModel == _courseModel)
+                {
+                    int x = 354;
+                }
+            }
+            else
+                _courseModel = courseModel;
 
         }
 

@@ -16,11 +16,10 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 
 //// For dependency Injection Configuration 
-
 ////builder.Services.[ServiceCollectionServiceExtensionsMethodName]<ModelName>(); //// Create Instance just using Class .
 
 //// using AddTransient<>  create a new instance every time , when need to inject a dependency 
-builder.Services.AddTransient<ICourseModel, CourseModel>();  //// Create Instance just using Interface . 
+//builder.Services.AddTransient<ICourseModel, CourseModel>();  //// Create Instance just using Interface . 
 
 
 ////using AddSingleton<> always passed a same intance , when need to inject a dependency  
@@ -28,7 +27,7 @@ builder.Services.AddSingleton<ICourseModel, CourseModel>();
 
 
 ////here, can define which instance are used where
-builder.Services.AddScoped<ICourseModel, CourseModel>();
+//builder.Services.AddScoped<ICourseModel, CourseModel>();
 
 
 
