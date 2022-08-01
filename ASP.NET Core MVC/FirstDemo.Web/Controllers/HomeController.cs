@@ -10,6 +10,8 @@ namespace FirstDemo.Web.Controllers
 
         private static ICourseModel _courseModel;
 
+
+        //// **** Should not be used Model in Dependency Injection , although here we used Model Instance for create a Dependency Injection Examples **** 
         public HomeController(ILogger<HomeController> logger,ICourseModel courseModel)
         {
             _logger = logger;
