@@ -8,9 +8,13 @@ namespace FirstDemo.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ICourseModel _courseModel;
+
+        public HomeController(ILogger<HomeController> logger,ICourseModel courseModel)
         {
             _logger = logger;
+            _courseModel = courseModel;
+
         }
 
         public IActionResult Index(int id)
