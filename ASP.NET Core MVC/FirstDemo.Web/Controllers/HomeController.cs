@@ -30,12 +30,14 @@ namespace FirstDemo.Web.Controllers
 
         public IActionResult Index(int id)
         {
+            _logger.LogInformation("I am in index page .");     //// here .LogInformation , .LogWarning and Like others are called log levels . 
             ViewData["id"] = id;
             return View();
         }
 
         public IActionResult Privacy()
         {
+            _logger.LogInformation("I am in privacy page .");   //// here .LogInformation , .LogWarning and Like others are called log levels . 
             return View();
         }
 
