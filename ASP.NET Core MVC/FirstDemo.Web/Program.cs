@@ -70,6 +70,9 @@ try
 
     var app = builder.Build();
 
+
+    // Here Log static class being accessible after initially app Build successfully .
+
     Log.Information("Application Starting .");
 
     // Configure the HTTP request pipeline.
