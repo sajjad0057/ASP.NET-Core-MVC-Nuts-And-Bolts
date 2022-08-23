@@ -1,6 +1,10 @@
 ﻿$boxColor: orange;
 $bgColor : silver;
 $btnColor : blanchedalmond ;
+
+
+
+
 @mixin someStyle($color,$btn) {
     div {
         background-color: $color;
@@ -17,3 +21,13 @@ $btnColor : blanchedalmond ;
 }
 
 @include someStyle($bgColor,$btnColor);
+
+
+
+@function func_Name($color) {
+
+    @return $color;
+}
+
+
+$funcVal : func_name(red);
