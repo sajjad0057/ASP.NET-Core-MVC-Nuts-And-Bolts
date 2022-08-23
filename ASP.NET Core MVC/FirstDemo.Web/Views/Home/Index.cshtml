@@ -2,15 +2,37 @@
     ViewData["Title"] = "Home Page";
 }
 
+
 @section Styles
 {
     <link rel="stylesheet" href="~/css/test.css"/>
+    <link rel="stylesheet" href="~/scss/StyleSheet.css" />
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome @ViewData["id"]</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<div class="box" id="test">
+    <p>
+        <h1>
+            scss
+        </h1>
+        <br />
+        
+    </p>
+    <button> test nesting </button>
+
+    
+</div>
+<br />
+<br />
+<button class="mybutton">
+    button
+</button>
+
+
 
 @*
 
@@ -22,6 +44,9 @@
 }
 
 *@
+
+
+
 
 
 
