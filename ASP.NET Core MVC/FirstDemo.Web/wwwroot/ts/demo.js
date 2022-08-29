@@ -45,7 +45,7 @@ var Octopus = /** @class */ (function () {
     function Octopus(name) {
         this.name = name;
         this.numberOfLegs = 8;
-    }
+    } //// here name property declare inline in constructor parameters . 
     return Octopus;
 }());
 var oct = new Octopus("Puppy");

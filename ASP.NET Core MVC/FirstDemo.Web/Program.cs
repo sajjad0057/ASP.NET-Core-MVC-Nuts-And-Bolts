@@ -1,8 +1,7 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using FirstDemo.Infrastructure.DbContexts;
 using FirstDemo.Web;
-using FirstDemo.Web.Data;
-using FirstDemo.Web.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
