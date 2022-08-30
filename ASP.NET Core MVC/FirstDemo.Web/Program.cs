@@ -1,11 +1,15 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using FirstDemo.Infrastructure;
 using FirstDemo.Infrastructure.DbContexts;
 using FirstDemo.Web;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Events;
+using System.Reflection;
+
+
 
 
 try
@@ -15,13 +19,17 @@ try
 
     // Add services to the container.
     var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    var assemblyName = Assembly.GetExecutingAssembly().FullName;
 
     #region Autofac Configuration
 
     builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());  //// by this here, added autofac as dependency injection framework with asp.net core app
     builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
     {
-        containerBuilder.RegisterModule(new WebModule());             //// here , can load one / more module that need for binding . 
+        //// here , can load one / more module that need for binding .
+        containerBuilder.RegisterModule(new WebModule());  //// it's for Web project dependency binding
+        
+        containerBuilder.RegisterModule(new InfrastructureModule(connectionString, assemblyName)); //// it's for Infrastructure project dependency binding
     });
 
     #endregion
@@ -60,7 +68,7 @@ try
 
 
     builder.Services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseSqlServer(connectionString));
+        options.UseSqlServer(connectionString, m => m.MigrationsAssembly(assemblyName)));
     builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
     builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)

@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace FirstDemo.Infrastructure.Entities
 {
-    public class Course : IEntity<Guid>
+    public class Student : IEntity<Guid>
     {
         public Guid Id { get; set; }
-        public string Title { get; set; }
-        public double Fees { get; set; }
-        public DateTime ClassStartDate { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public double Cgpa { get; set; }
+
 
     }
 }
