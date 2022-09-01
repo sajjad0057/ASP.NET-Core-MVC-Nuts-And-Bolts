@@ -14,10 +14,7 @@ namespace FirstDemo.Infrastructure.DbContexts
         private readonly string _migrationAssemblyName;
 
 
-        //// using DbSet<T> generic class  here, T class connect with DbContext class .
-        //// Only which classes are set with DbSet<T> class, these classes are can perform CRUD operation in Database
-        public DbSet<Course> Courses { get; set; }
-        public DbSet<Student> Students { get; set; }
+
 
         public ApplicationDbContext(string connectingString, string migrationAssemblyName)
         {
@@ -35,6 +32,13 @@ namespace FirstDemo.Infrastructure.DbContexts
 
             base.OnConfiguring(optionsBuilder);
         }
+
+
+        //// using DbSet<T> generic class  here, T class connect with DbContext class .
+        //// Only which classes are set with DbSet<T> class, these classes are can perform CRUD operation in Database
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Logs> Logs { get; set; }
 
 
 
