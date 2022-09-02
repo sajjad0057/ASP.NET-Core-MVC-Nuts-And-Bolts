@@ -6,7 +6,6 @@ using FirstDemo.Web;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
-using Serilog.Sinks.MSSqlServer;
 using Serilog.Events;
 using System.Reflection;
 
