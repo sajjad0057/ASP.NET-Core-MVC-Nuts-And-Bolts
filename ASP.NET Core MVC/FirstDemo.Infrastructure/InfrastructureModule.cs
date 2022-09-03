@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using FirstDemo.Infrastructure.DbContexts;
+using FirstDemo.Infrastructure.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,10 @@ namespace FirstDemo.Infrastructure
                 WithParameter("connectingString", _connectingString).
                 WithParameter("migrationAssemblyName", _migrationAssemblyName).
                 InstancePerLifetimeScope();
+
+
+            builder.RegisterType<CourseService>().As<ICourseService>()
+                .InstancePerLifetimeScope();
 
             base.Load(builder);
         }

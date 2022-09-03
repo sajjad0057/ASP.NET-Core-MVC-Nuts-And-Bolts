@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using FirstDemo.Web.Areas.Admin.Models;
 using FirstDemo.Web.Models;
 
 namespace FirstDemo.Web
@@ -25,6 +26,8 @@ namespace FirstDemo.Web
             //    .InstancePerLifetimeScope();
 
             builder.RegisterType<CourseModel>().AsSelf();      //// here , instance create with only Class  .
+
+            builder.RegisterType<CourseCreateModel>().AsSelf();
 
             base.Load(builder);
         }
