@@ -1,4 +1,6 @@
-﻿using FirstDemo.Infrastructure.Repositories;
+﻿using FirstDemo.Infrastructure.DbContexts;
+using FirstDemo.Infrastructure.Repositories;
+using FirstDemo.Infrastructure.UnitOfWorks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,19 +14,24 @@ namespace FirstDemo.Infrastructure.Services
 {
     public class CourseService : ICourseService
     {
-        CourseRepository<CourseEO> courseRepository;
+        private  IApplicationUnitOfWork _applicationUnitOfWork;
+        public CourseService(IApplicationUnitOfWork applicationUnitOfWork)
+        {
+            _applicationUnitOfWork = applicationUnitOfWork;
+        }
         public void CreateCourse(CourseBO course)
         {
             course.SetProperClassStartDate();
 
-            CourseEO courseEO = new CourseEO();
+            CourseEO courseEntity = new CourseEO();
 
             //// In furure we can done this work using automapper feature . 
-            courseEO.Title = course.Name;
-            courseEO.Fees = course.Fees;
-            courseEO.ClassStartDate = course.ClassStartDate;
+            courseEntity.Title = course.Name;
+            courseEntity.Fees = course.Fees;
+            courseEntity.ClassStartDate = course.ClassStartDate;
 
-            courseRepository.Add(courseEO);
+            _applicationUnitOfWork.Courses.Add(courseEntity);
+            _applicationUnitOfWork.Save();
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using FirstDemo.Infrastructure.DbContexts;
+using FirstDemo.Infrastructure.Repositories;
 using FirstDemo.Infrastructure.Services;
+using FirstDemo.Infrastructure.UnitOfWorks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,14 +28,28 @@ namespace FirstDemo.Infrastructure
             //// InstancePerLifetimeScope() method keeps a single instance for single request .
             //// here pass parameter coz, ApplicationDbContext class constructor received two parameters . 
            
-            builder.RegisterType<ApplicationDbContext>().AsSelf().
-                WithParameter("connectingString", _connectingString).
-                WithParameter("migrationAssemblyName", _migrationAssemblyName).
-                InstancePerLifetimeScope();
+            builder.RegisterType<ApplicationDbContext>().AsSelf()
+                .WithParameter("connectingString", _connectingString)
+                .WithParameter("migrationAssemblyName", _migrationAssemblyName)
+                .InstancePerLifetimeScope();
 
+            builder.RegisterType<ApplicationDbContext>().As<IApplicationDbContext>()
+                .WithParameter("connectingString", _connectingString)
+                .WithParameter("migrationAssemblyName", _migrationAssemblyName)
+                .InstancePerLifetimeScope();
+
+
+            builder.RegisterType<ApplicationUnitOfWork>().As<IApplicationUnitOfWork>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<CourseRepository>().As<ICourseRepository>()
+                .InstancePerLifetimeScope();
 
             builder.RegisterType<CourseService>().As<ICourseService>()
                 .InstancePerLifetimeScope();
+
+
+
 
             base.Load(builder);
         }

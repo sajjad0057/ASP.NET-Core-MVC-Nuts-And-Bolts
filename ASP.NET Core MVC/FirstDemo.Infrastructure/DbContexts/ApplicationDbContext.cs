@@ -8,7 +8,7 @@ namespace FirstDemo.Infrastructure.DbContexts
     /*
     IdentityDbContext class basically provide by default login, logout , or auth features 
     */
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext, IApplicationDbContext
     {
         private readonly string _connectingString;
         private readonly string _migrationAssemblyName;
