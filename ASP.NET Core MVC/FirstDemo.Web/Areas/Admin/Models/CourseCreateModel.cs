@@ -33,7 +33,7 @@ namespace FirstDemo.Web.Areas.Admin.Models
         }
         internal async Task CreateCourse()        //// we use async method here for, program wait here for successfully create Course instance
         {
-            //// We Can Create BusinessObject using AutoMapper , now create manually -
+            ////later We Create BusinessObject using AutoMapper , now create manually -
             
             Course course = new Course();
             course.Name = Title;
