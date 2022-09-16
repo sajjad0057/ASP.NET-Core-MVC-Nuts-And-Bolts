@@ -15,6 +15,8 @@ namespace FirstDemo.Web.Areas.Admin.Models
         private  ICourseService _courseService;
         private  ILifetimeScope _scope;
 
+        //// Must be keep here empty Constructor 
+
         public CourseCreateModel()
         {
 
