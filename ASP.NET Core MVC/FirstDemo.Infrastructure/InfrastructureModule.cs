@@ -30,8 +30,10 @@ namespace FirstDemo.Infrastructure
 
 
             /*
-               Must be Binding ApplicationDbContext as AsSelf()...Coz just ApplicationDbContext Class have parametterized constructor
-               not interface consists parameters , so that for ApplicationDbContext binding with his interface IApplicationDbContext is not enough.    
+               Must be Binding ApplicationDbContext as AsSelf()..ApplicationDbContext Class have parametterized constructor
+            -------------------------------------------------------------------------------------------------------------------------------------------
+               Basically the main reason is when we create migrations we use --context ApplicationDbContext in migration command , 
+               not Use IApplicationDbContext interface , so that Command Cannot resolve this interface . so need ApplicationDbContext AsSelf() Binding.
              */
             builder.RegisterType<ApplicationDbContext>().AsSelf()
                 .WithParameter("connectingString", _connectingString)
