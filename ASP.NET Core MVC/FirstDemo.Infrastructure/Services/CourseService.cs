@@ -40,7 +40,7 @@ namespace FirstDemo.Infrastructure.Services
             int pageSize, string searchText, string orderby)
         {
             (IList<CourseEO> data, int total, int totalDisplay) results = _applicationUnitOfWork
-                .Courses.GetDynamic(x => x.Title.Contains(searchText), orderby, "Topics,CourseStudents", pageIndex, pageSize, true);
+                .Courses.GetCourses(pageIndex, pageSize, searchText, orderby);
 
 
             IList<CourseBO> courses = new List<CourseBO>();

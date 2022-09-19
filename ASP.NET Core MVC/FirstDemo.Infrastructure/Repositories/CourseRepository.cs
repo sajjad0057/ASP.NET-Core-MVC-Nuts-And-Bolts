@@ -17,8 +17,19 @@ namespace FirstDemo.Infrastructure.Repositories
 
         public CourseRepository(IApplicationDbContext context) : base((DbContext)context)
         {
-            
         }
+
+
+        public (IList<Course> data, int total, int totalDisplay) GetCourses(int pageIndex,
+            int pageSize,string searchText,string orderby)
+        {
+            (IList<Course> data, int total, int totalDisplay) results = 
+                GetDynamic(x => x.Title.Contains(searchText), orderby, "Topics,CourseStudents", pageIndex, pageSize, true);
+
+            return results;
+        }
+
+        
 
     }
 }
