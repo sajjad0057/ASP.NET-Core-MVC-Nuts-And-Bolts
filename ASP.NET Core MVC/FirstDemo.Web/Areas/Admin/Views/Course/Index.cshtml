@@ -75,7 +75,14 @@
     <!-- Page specific script -->
     <script>
         $(function () {
-            $("#courses").DataTable();
+            $("#courses").DataTable({
+                "processing" : true,
+                "serverSide" : true,
+                //// By this Url , When load this page , ajax hit this URL . for this Fire GetCourseData function in controller -
+                "ajax" : {
+                    "url": "/admin/course/GetCourseData",
+                },
+            });
         });
     </script>
 }
