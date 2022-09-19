@@ -1,6 +1,7 @@
 ﻿using FirstDemo.Web.Areas.Admin.Models;
 using Microsoft.AspNetCore.Mvc;
 using Autofac;
+using FirstDemo.Web.Models;
 
 namespace FirstDemo.Web.Areas.Admin.Controllers
 {
@@ -56,9 +57,11 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
             return View();
         }
 
-        public IActionResult GetCourseData()
+        public JsonResult GetCourseData()
         {
-            return View();
+            var dataTableModel = new DataTablesAjaxRequestModel(Request);  //// Here Request - object is Controller class property.
+            var model = _scope.Resolve<CourseListModel>();
+            return Json(model.GetPagedCourse(dataTableModel));
         }
     }
 }

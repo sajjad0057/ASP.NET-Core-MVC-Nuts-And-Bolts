@@ -27,7 +27,10 @@ namespace FirstDemo.Web
 
             builder.RegisterType<CourseModel>().AsSelf();      //// here , instance create with only Class  .
 
+
             builder.RegisterType<CourseCreateModel>().AsSelf();
+            builder.RegisterType<CourseListModel>().AsSelf();
+
 
             base.Load(builder);
         }
