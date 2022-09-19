@@ -19,6 +19,7 @@ namespace FirstDemo.Infrastructure.Services
         {
             _applicationUnitOfWork = applicationUnitOfWork;
         }
+
         public void CreateCourse(CourseBO course)
         {
             course.SetProperClassStartDate();
@@ -33,5 +34,32 @@ namespace FirstDemo.Infrastructure.Services
             _applicationUnitOfWork.Courses.Add(courseEntity);
             _applicationUnitOfWork.Save();
         }
+
+
+        public (int total , int totalDisplay, IList<CourseBO> records) GetCourses(int pageIndex,
+            int pageSize, string searchText, string orderby)
+        {
+            (IList<CourseEO> data, int total, int totalDisplay) results = _applicationUnitOfWork
+                .Courses.GetDynamic(x => x.Title.Contains(searchText), orderby, "Topics,CourseStudents", pageIndex, pageSize, true);
+
+
+            IList<CourseBO> courses = new List<CourseBO>();
+            foreach(CourseEO courseEO in results.data)
+            {
+                courses.Add(new CourseBO
+                {
+                    Id = courseEO.Id,
+                    Name = courseEO.Title,
+                    Fees = courseEO.Fees,
+                    ClassStartDate = courseEO.ClassStartDate,
+                });
+
+            }
+
+            return (results.total, results.totalDisplay, courses);
+
+
+        }
+
     }
 }

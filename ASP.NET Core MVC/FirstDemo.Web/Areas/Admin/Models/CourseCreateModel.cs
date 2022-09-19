@@ -5,7 +5,7 @@ using Autofac;
 
 namespace FirstDemo.Web.Areas.Admin.Models
 {
-    public class CourseCreateModel
+    public class CourseCreateModel : BaseModel
     {
         [Required]
         public string Title { get; set; }
@@ -13,11 +13,10 @@ namespace FirstDemo.Web.Areas.Admin.Models
         public DateTime ClassStartDate { get; set; }
 
         private  ICourseService _courseService;
-        private  ILifetimeScope _scope;
 
         //// Must be keep here empty Constructor 
 
-        public CourseCreateModel()
+        public CourseCreateModel() : base()
         {
 
         }
@@ -28,9 +27,9 @@ namespace FirstDemo.Web.Areas.Admin.Models
         }
 
 
-        internal void ResolveDependency(ILifetimeScope scope)
+        public override void ResolveDependency(ILifetimeScope scope)
         {
-            _scope = scope;
+            base.ResolveDependency(scope);
             _courseService = _scope.Resolve<ICourseService>();
         }
         internal async Task CreateCourse()        //// we use async method here for, program wait here for successfully create Course instance
