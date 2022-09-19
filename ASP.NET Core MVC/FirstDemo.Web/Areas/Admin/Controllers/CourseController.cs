@@ -55,5 +55,10 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
             }
             return View();
         }
+
+        public IActionResult GetCourseData()
+        {
+            return View();
+        }
     }
 }
