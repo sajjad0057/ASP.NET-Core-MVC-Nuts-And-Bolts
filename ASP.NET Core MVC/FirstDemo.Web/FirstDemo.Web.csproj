@@ -51,11 +51,4 @@
     <TypeScriptCompile Include="wwwroot\ts\demo.ts" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Test\Controllers\" />
-    <Folder Include="Areas\Test\Data\" />
-    <Folder Include="Areas\Test\Models\" />
-    <Folder Include="Areas\Test\Views\" />
-  </ItemGroup>
-
 </Project>
