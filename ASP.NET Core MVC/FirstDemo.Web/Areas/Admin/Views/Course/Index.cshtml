@@ -26,6 +26,7 @@
                                 <th>Title</th>
                                 <th>Fees</th>
                                 <th>Class Start Date</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
 
@@ -34,6 +35,7 @@
                                 <th>Title</th>
                                 <th>Fees</th>
                                 <th>Class Start Date</th>
+                                <th>Actions</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -48,6 +50,9 @@
     <!-- /.row -->
 </div>
 <!-- /.container-fluid -->
+
+    <partial name="_ModalPartial" />
+
 
 @section Scripts
 {
@@ -66,7 +71,44 @@
                 "ajax" : {
                     "url": "/admin/course/GetCourseData",
                 },
+
+
+                "columnDefs": [
+                    {
+                        "orderable": false,
+                        "targets": 3,
+                        "render": function (data, type, row) {
+                            return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='/admin/course/edit/${data}'" value='${data}'>
+                                        <i class="fas fa-pencil-alt">
+                                        </i>
+                                        Edit
+                                    </button>
+                                    <button type="submit" class="btn btn-danger btn-sm show-bs-modal" data-id='${data}' value='${data}'>
+                                        <i class="fas fa-trash">
+                                        </i>
+                                        Delete
+                                    </button>`;
+                        }
+                    }
+                ]
             });
+
+
+
+            $('#courses').on('click', '.show-bs-modal', function (event) {
+                var id = $(this).data("id");
+                var modal = $("#modal-default");
+                modal.find('.modal-body p').text('Are you sure you want to delete this record?');
+                $("#deleteId").val(id);
+                $("#deleteForm").attr("action", "/admin/course/delete");
+                modal.modal('show');
+            });
+
+            $("#deleteButton").click(function () {
+                $("#deleteForm").submit();
+            });
+
+
         });
     </script>
 }
