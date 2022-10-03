@@ -66,6 +66,7 @@ namespace FirstDemo.Infrastructure.Services
         public void DeteleCourse(Guid id)
         {
             _applicationUnitOfWork.Courses.Remove(id);
+            _applicationUnitOfWork.Save();
         }
 
         public CourseBO GetCourse(Guid id)
