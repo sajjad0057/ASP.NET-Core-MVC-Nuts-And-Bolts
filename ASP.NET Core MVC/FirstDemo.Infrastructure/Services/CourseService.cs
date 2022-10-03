@@ -61,5 +61,43 @@ namespace FirstDemo.Infrastructure.Services
 
         }
 
+
+
+        public void DeteleCourse(Guid id)
+        {
+            _applicationUnitOfWork.Courses.Remove(id);
+        }
+
+        public CourseBO GetCourse(Guid id)
+        {
+            CourseEO courseEO = _applicationUnitOfWork.Courses.GetById(id);
+
+            CourseBO courseBO = new CourseBO();
+
+            courseBO.Id = courseEO.Id;
+            courseBO.Name = courseEO.Title;
+            courseBO.Fees = courseEO.Fees;
+            courseBO.ClassStartDate = courseEO.ClassStartDate;
+
+            return courseBO;
+        }
+
+        public void EditCourse(CourseBO courseBO)
+        {
+            var courseEO = _applicationUnitOfWork.Courses.GetById(courseBO.Id);
+
+            if(courseEO != null)
+            {
+                courseEO.Title = courseBO.Name;
+                courseEO.Fees = courseBO.Fees;
+                courseEO.ClassStartDate = courseBO.ClassStartDate;
+
+                _applicationUnitOfWork.Save();
+            }
+            else
+            {
+                throw new InvalidOperationException(" Course Doesn't Exists !");
+            }
+        }
     }
 }

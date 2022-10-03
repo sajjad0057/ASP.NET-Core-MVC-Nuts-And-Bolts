@@ -53,5 +53,9 @@ namespace FirstDemo.Web.Areas.Admin.Models
             };
         }
 
+        internal void DeleteCourse(Guid id)
+        {
+            _courseService.DeteleCourse(id);
+        }
     }
 }
