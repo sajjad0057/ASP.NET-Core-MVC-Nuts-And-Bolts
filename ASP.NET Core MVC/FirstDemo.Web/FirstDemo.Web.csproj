@@ -51,4 +51,8 @@
     <TypeScriptCompile Include="wwwroot\ts\demo.ts" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Codes\" />
+  </ItemGroup>
+
 </Project>

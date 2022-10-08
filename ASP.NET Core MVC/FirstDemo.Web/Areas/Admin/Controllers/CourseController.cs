@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Autofac;
 using FirstDemo.Web.Models;
 using FirstDemo.Web.Codes;
+using FirstDemo.Infrastructure.Exceptions;
+using Microsoft.Extensions.Logging;
 
 namespace FirstDemo.Web.Areas.Admin.Controllers
 {
@@ -20,7 +22,7 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index()       
         {
             return View();
         }
@@ -42,6 +44,9 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
 
 
 
+
+
+
         /* Here created CourseCreateModel instance from modelBinder . ModelBinder creating CourseCreateModel instance using 
            Empty constructor of CourseCreateModel class . but here need CourseCreateModel having ICourseService dependency -
            For this we resolved this issue using Autofac container ILifetimeScope .  
@@ -53,10 +58,47 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
             if (ModelState.IsValid)     //// Here , ModelState.IsValid property comming from Controller parent class
             {
                 model.ResolveDependency(_scope);
-                await model.CreateCourse();
+
+                try
+                {
+                    await model.CreateCourse();
+
+                    TempData.Put<ResponseModel>("ResponseMessage", new ResponseModel
+                    {
+                        Message = "Successfully added a new course .",
+                        Type = ResponseTypes.Success
+                    });
+
+                    return RedirectToAction("Index");
+                }
+                catch (DuplicateException ioe)
+                {
+                    _logger.LogError(ioe, ioe.Message);
+
+                    TempData.Put<ResponseModel>("ResponseMessage", new ResponseModel
+                    {
+                        Message = ioe.Message,
+                        Type = ResponseTypes.Danger
+                    });
+                }
+                catch(Exception ex)
+                {
+                    _logger.LogError(ex, ex.Message);
+                    TempData.Put<ResponseModel>("ResponseMessage", new ResponseModel
+                    {
+                        Message = "There Was a Problem in Creating Course .",
+                        Type = ResponseTypes.Danger
+                    });
+                }
+                
             }
-            return View();
+
+            return View(model);
         }
+
+
+
+
 
         public JsonResult GetCourseData()
         {
