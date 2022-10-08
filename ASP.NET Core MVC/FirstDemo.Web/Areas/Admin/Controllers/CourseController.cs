@@ -127,16 +127,23 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
                 try
                 {
                     model.EditCourse();
-                    TempData["ResponseMessage"] = "Successfuly updated course.";
-                    TempData["ResponseType"] = ResponseTypes.Success;
+
+                    TempData.Put<ResponseModel>("ResponseMessage", new ResponseModel
+                    {
+                        Message = "Successfully Updated course ! ",
+                        Type = ResponseTypes.Success
+                    });
 
                     return RedirectToAction("Index");
                 }
                 catch(Exception ex)
                 {
                     _logger.LogError(ex, ex.Message);
-                    TempData["ResponseMessage"] = "There was a problem in updating course.";
-                    TempData["ResponseType"] = ResponseTypes.Danger;
+                    TempData.Put<ResponseModel>("ResponseMessage", new ResponseModel
+                    {
+                        Message = "There Was a Problem in Updating Course .",
+                        Type = ResponseTypes.Danger
+                    });
 
                 }
             }
@@ -154,14 +161,20 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
                 var model = _scope.Resolve<CourseListModel>();
                 model.DeleteCourse(id);
 
-                TempData["ResponseMessage"] = "Successfuly deleted course .";  //// TempData is a temporary dataStructure in Razor pages
-                TempData["ResponseType"] = ResponseTypes.Success; 
+                TempData.Put<ResponseModel>("ResponseMessage", new ResponseModel
+                {
+                    Message = "Successfully Deleted this course ! ",
+                    Type = ResponseTypes.Success
+                });
             }
             catch(Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
-                TempData["ResponseMessage"] = "There Was a problem in deleting courses !";
-                TempData["ResponseType"] = ResponseTypes.Danger;
+                TempData.Put<ResponseModel>("ResponseMessage", new ResponseModel
+                {
+                    Message = "There Was a Problem in Deleting Course .",
+                    Type = ResponseTypes.Danger
+                });
             }
 
             return RedirectToAction("Index");
