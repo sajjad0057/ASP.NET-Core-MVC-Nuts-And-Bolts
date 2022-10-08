@@ -109,6 +109,7 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
 
 
 
+
         public IActionResult Edit(Guid id)
         {
             CourseEditModel model = _scope.Resolve<CourseEditModel>();
