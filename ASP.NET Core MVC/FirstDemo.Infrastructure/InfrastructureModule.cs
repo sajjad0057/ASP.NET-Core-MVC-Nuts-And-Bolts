@@ -56,6 +56,14 @@ namespace FirstDemo.Infrastructure
                 .InstancePerLifetimeScope();
 
 
+            builder.RegisterType<TimeService>().As<ITimeService>()
+                .InstancePerLifetimeScope();
+
+
+            builder.RegisterType<DataUtility>().As<IDataUtility>()
+                .InstancePerLifetimeScope();
+
+
 
 
             base.Load(builder);

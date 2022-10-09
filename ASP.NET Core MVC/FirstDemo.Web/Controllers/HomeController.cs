@@ -1,4 +1,5 @@
-﻿using FirstDemo.Web.Models;
+﻿using FirstDemo.Infrastructure.Services;
+using FirstDemo.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -12,7 +13,8 @@ namespace FirstDemo.Web.Controllers
 
 
         //// **** Should not be used Model in Dependency Injection , although here we used Model Instance for create a Dependency Injection Examples **** 
-        public HomeController(ILogger<HomeController> logger,ICourseModel courseModel)
+        public HomeController(ILogger<HomeController> logger,ICourseModel courseModel,
+            IDataUtility dataUtility)
         {
             _logger = logger;
 
