@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,24 +13,24 @@ namespace FirstDemo.Infrastructure.Services
     {
 
         private readonly string _connectionString;
-        private readonly ITimeService _timeService;
+        
 
         //// From IConfiguration, can Access  appsettings.json file all info -
-        public DataUtility(IConfiguration config,ITimeService timeService)
+        public DataUtility(IConfiguration config)
         {
             _connectionString = config.GetConnectionString("DefaultConnection");
-            _timeService = timeService;
+            
         }
-        public async Task InsertDataAsync()
+        public async Task InsertDataAsync(string command)
         {
 
-            SqlConnection sqlConnection = new SqlConnection();
+            using SqlConnection sqlConnection = new SqlConnection();
             sqlConnection.ConnectionString = _connectionString;
 
-            SqlCommand sqlCommand = sqlConnection.CreateCommand();
+            using SqlCommand sqlCommand = sqlConnection.CreateCommand();
             sqlCommand.Connection = sqlConnection;
-            sqlCommand.CommandText = 
-                $"insert into Courses (Id,Title,Fees,ClassStartDate) values('{Guid.NewGuid()}','ADO.NET',2000,'{_timeService.Now.AddDays(30).ToString()}')";
+            sqlCommand.CommandText = command;
+                
 
             try
             {
@@ -46,7 +47,7 @@ namespace FirstDemo.Infrastructure.Services
             }
             finally
             {
-                sqlCommand.Dispose();
+
             }
 
 

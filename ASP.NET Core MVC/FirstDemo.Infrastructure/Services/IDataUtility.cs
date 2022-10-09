@@ -2,6 +2,6 @@
 {
     public interface IDataUtility
     {
-        Task InsertDataAsync();
+        Task InsertDataAsync(string command);
     }
 }

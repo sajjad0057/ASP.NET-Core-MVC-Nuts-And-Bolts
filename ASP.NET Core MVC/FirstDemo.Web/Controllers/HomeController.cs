@@ -13,11 +13,12 @@ namespace FirstDemo.Web.Controllers
         
 
         private readonly IDataUtility _dataUtility;
+        private readonly ITimeService _timeService;
 
 
         //// **** Should not be used Model in Dependency Injection , although here we used Model Instance for create a Dependency Injection Examples **** 
         public HomeController(ILogger<HomeController> logger,ICourseModel courseModel,
-            IDataUtility dataUtility)
+            IDataUtility dataUtility, ITimeService timeService)
         {
             _logger = logger;
 
@@ -32,6 +33,7 @@ namespace FirstDemo.Web.Controllers
                 _courseModel = courseModel;
 
             _dataUtility = dataUtility;
+            _timeService = timeService;
 
         }
 
@@ -41,8 +43,10 @@ namespace FirstDemo.Web.Controllers
             ViewData["id"] = id;
 
 
+            ////string sql = $"insert into Courses (Id,Title,Fees,ClassStartDate) values('{Guid.NewGuid()}','ADO.NET',2000,'{_timeService.Now.AddDays(30).ToString()}')";
+            string sql = "delete from courses where Title = 'ADO.NET' ";
             //// Test for Ado.Net - 
-            await _dataUtility.InsertDataAsync();
+            await _dataUtility.InsertDataAsync(sql);
 
             return View();
         }
