@@ -1,4 +1,5 @@
-﻿using FirstDemo.Infrastructure.DbContexts;
+﻿using AutoMapper;
+using FirstDemo.Infrastructure.DbContexts;
 using FirstDemo.Infrastructure.Exceptions;
 using FirstDemo.Infrastructure.Repositories;
 using FirstDemo.Infrastructure.UnitOfWorks;
@@ -15,29 +16,31 @@ namespace FirstDemo.Infrastructure.Services
 {
     public class CourseService : ICourseService
     {
+        
         private  IApplicationUnitOfWork _applicationUnitOfWork;
-        public CourseService(IApplicationUnitOfWork applicationUnitOfWork)
+        private IMapper _mapper;
+
+        public CourseService(IApplicationUnitOfWork applicationUnitOfWork, IMapper mapper)
         {
             _applicationUnitOfWork = applicationUnitOfWork;
+            _mapper = mapper;
         }
 
-        public void CreateCourse(CourseBO course)
+        public void CreateCourse(CourseBO courseBO)
         {
-            var count = _applicationUnitOfWork.Courses.GetCount(x => x.Title == course.Name);
+            var count = _applicationUnitOfWork.Courses.GetCount(x => x.Title == courseBO.Name);
 
             if(count > 0)
             {
                 throw new DuplicateException("Course Title Already Exists !");
             }
 
-            course.SetProperClassStartDate();
+            courseBO.SetProperClassStartDate();
 
-            CourseEO courseEntity = new CourseEO();
 
-            //// In furure we can done this work using automapper feature . 
-            courseEntity.Title = course.Name;
-            courseEntity.Fees = course.Fees;
-            courseEntity.ClassStartDate = course.ClassStartDate;
+            //// Using AutoMapper - 
+            
+            CourseEO courseEntity = _mapper.Map<CourseEO>(courseBO);  //// In this Overload Using sourse as courseBO and returned courseEntity object mapping CourseBO with CourseEO
 
             _applicationUnitOfWork.Courses.Add(courseEntity);
             _applicationUnitOfWork.Save();
@@ -52,15 +55,10 @@ namespace FirstDemo.Infrastructure.Services
 
 
             IList<CourseBO> courses = new List<CourseBO>();
+
             foreach(CourseEO courseEO in results.data)
             {
-                courses.Add(new CourseBO
-                {
-                    Id = courseEO.Id,
-                    Name = courseEO.Title,
-                    Fees = courseEO.Fees,
-                    ClassStartDate = courseEO.ClassStartDate,
-                });
+                courses.Add(_mapper.Map<CourseBO>(courseEO));
 
             }
 
@@ -81,12 +79,7 @@ namespace FirstDemo.Infrastructure.Services
         {
             CourseEO courseEO = _applicationUnitOfWork.Courses.GetById(id);
 
-            CourseBO courseBO = new CourseBO();
-
-            courseBO.Id = courseEO.Id;
-            courseBO.Name = courseEO.Title;
-            courseBO.Fees = courseEO.Fees;
-            courseBO.ClassStartDate = courseEO.ClassStartDate;
+            CourseBO courseBO = _mapper.Map<CourseBO>(courseEO);
 
             return courseBO;
         }
@@ -97,10 +90,7 @@ namespace FirstDemo.Infrastructure.Services
 
             if(courseEO != null)
             {
-                courseEO.Title = courseBO.Name;
-                courseEO.Fees = courseBO.Fees;
-                courseEO.ClassStartDate = courseBO.ClassStartDate;
-
+                _mapper.Map(courseBO, courseEO);  //// In this Overload Using sourse as courseBO and and Mapping CourseBO with old CourseEO
                 _applicationUnitOfWork.Save();
             }
             else
