@@ -21,7 +21,7 @@ namespace FirstDemo.Infrastructure.Services
             _connectionString = config.GetConnectionString("DefaultConnection");
             
         }
-        public async Task InsertDataAsync(string command)
+        public async Task ExecuteCommandAsync(string command,Dictionary<string,object> parameters)
         {
 
             using SqlConnection sqlConnection = new SqlConnection();
@@ -37,6 +37,14 @@ namespace FirstDemo.Infrastructure.Services
                 if(sqlConnection.State != System.Data.ConnectionState.Open)
                 {
                     sqlConnection.Open();   
+                }
+
+                if(parameters != null)
+                {
+                    foreach(var item in parameters)
+                    {
+                        sqlCommand.Parameters.Add(new SqlParameter(item.Key,item.Value));
+                    }
                 }
 
                 int impact = await sqlCommand.ExecuteNonQueryAsync();

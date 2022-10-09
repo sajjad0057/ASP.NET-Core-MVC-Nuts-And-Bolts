@@ -2,6 +2,6 @@
 {
     public interface IDataUtility
     {
-        Task InsertDataAsync(string command);
+        Task ExecuteCommandAsync(string command, Dictionary<string, object> parameters);
     }
 }

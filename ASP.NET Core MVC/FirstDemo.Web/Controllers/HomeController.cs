@@ -42,11 +42,16 @@ namespace FirstDemo.Web.Controllers
             _logger.LogInformation("I am in index page .");     //// here .LogInformation , .LogWarning and Like others are called log levels . 
             ViewData["id"] = id;
 
-
-            ////string sql = $"insert into Courses (Id,Title,Fees,ClassStartDate) values('{Guid.NewGuid()}','ADO.NET',2000,'{_timeService.Now.AddDays(30).ToString()}')";
-            string sql = "delete from courses where Title = 'ADO.NET' ";
+            //// string sql = "delete from courses where Title = 'ADO.NET' ";
+            string sql = $"insert into Courses (Id,Title,Fees,ClassStartDate) values(@xId,@xTitle,@xFees,@xClassStartDate)";
+            
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("xId", Guid.NewGuid());
+            parameters.Add("xTitle","ADO.NET");
+            parameters.Add("xFees",3000);
+            parameters.Add("xClassStartDate", _timeService.Now.AddDays(30).ToString());
             //// Test for Ado.Net - 
-            await _dataUtility.InsertDataAsync(sql);
+            await _dataUtility.ExecuteCommandAsync(sql,parameters);
 
             return View();
         }
