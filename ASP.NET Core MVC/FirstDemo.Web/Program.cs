@@ -67,6 +67,12 @@ try
     #endregion
 
 
+    #region Config AutoMapper
+    
+    builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+    #endregion
+
 
     builder.Services.AddDbContext<ApplicationDbContext>(options =>
         options.UseSqlServer(connectionString, m => m.MigrationsAssembly(assemblyName)));
