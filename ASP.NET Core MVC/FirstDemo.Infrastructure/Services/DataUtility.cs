@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,15 +8,24 @@ using System.Threading.Tasks;
 
 namespace FirstDemo.Infrastructure.Services
 {
-    public class DataUtility
+    public class DataUtility : IDataUtility
     {
-        public static void InsertData()
+
+        private readonly string _connectionString;
+
+        //// From IConfiguration, can Access  appsettings.json file all info -
+        public DataUtility(IConfiguration config)
+        {
+            _connectionString = config.GetConnectionString("DefaultConnection");
+        }
+        public void InsertData()
         {
 
             SqlConnection sqlConnection = new SqlConnection();
-            sqlConnection.ConnectionString = "Server = .\\SQLEXPRESS; Database = Asp.netCoreMvc; User Id = Asp.netCoreMvc; Password = 123456;";
+            sqlConnection.ConnectionString = _connectionString;
 
 
         }
+
     }
 }
