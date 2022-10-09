@@ -1,7 +1,8 @@
-﻿using FirstDemo.Infrastructure.BusinessObjects;
+﻿using CourseBO = FirstDemo.Infrastructure.BusinessObjects.Course;
 using FirstDemo.Infrastructure.Services;
 using System.ComponentModel.DataAnnotations;
 using Autofac;
+using AutoMapper;
 
 namespace FirstDemo.Web.Areas.Admin.Models
 {
@@ -13,6 +14,7 @@ namespace FirstDemo.Web.Areas.Admin.Models
         public DateTime ClassStartDate { get; set; }
 
         private  ICourseService _courseService;
+        private IMapper _mapper;
 
         //// Must be keep here empty Constructor 
 
@@ -21,9 +23,10 @@ namespace FirstDemo.Web.Areas.Admin.Models
 
         }
 
-        public CourseCreateModel(ICourseService courseService)
+        public CourseCreateModel(ICourseService courseService,IMapper mapper)
         {
             _courseService = courseService;
+            _mapper = mapper;
         }
 
 
@@ -31,15 +34,12 @@ namespace FirstDemo.Web.Areas.Admin.Models
         {
             base.ResolveDependency(scope);
             _courseService = _scope.Resolve<ICourseService>();
+            _mapper = _scope.Resolve<IMapper>();
         }
         internal async Task CreateCourse()        //// we use async method here for, program wait here for successfully create Course instance
         {
-            ////later We Create BusinessObject using AutoMapper , now create manually -
-            
-            Course course = new Course();
-            course.Name = Title;
-            course.Fees = Fees;
-            course.ClassStartDate = ClassStartDate;
+
+            CourseBO course = _mapper.Map<CourseBO>(this);  //// If we set here 'this' then having problem when we try to perform unit testing . 
 
             _courseService.CreateCourse(course);
         }

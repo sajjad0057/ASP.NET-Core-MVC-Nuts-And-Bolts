@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using AutoMapper;
 using FirstDemo.Infrastructure.Services;
 using FirstDemo.Web.Models;
 
@@ -8,6 +9,7 @@ namespace FirstDemo.Web.Areas.Admin.Models
     {
 
         private ICourseService _courseService;
+
 
         //// Must be keep here empty Constructor 
 
@@ -19,6 +21,7 @@ namespace FirstDemo.Web.Areas.Admin.Models
         public CourseListModel(ICourseService courseService)
         {
             _courseService = courseService;
+
         }
 
 
