@@ -12,17 +12,42 @@ namespace FirstDemo.Infrastructure.Services
     {
 
         private readonly string _connectionString;
+        private readonly ITimeService _timeService;
 
         //// From IConfiguration, can Access  appsettings.json file all info -
-        public DataUtility(IConfiguration config)
+        public DataUtility(IConfiguration config,ITimeService timeService)
         {
             _connectionString = config.GetConnectionString("DefaultConnection");
+            _timeService = timeService;
         }
-        public void InsertData()
+        public async Task InsertDataAsync()
         {
 
             SqlConnection sqlConnection = new SqlConnection();
             sqlConnection.ConnectionString = _connectionString;
+
+            SqlCommand sqlCommand = sqlConnection.CreateCommand();
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.CommandText = 
+                $"insert into Courses (Id,Title,Fees,ClassStartDate) values('{Guid.NewGuid()}','ADO.NET',2000,'{_timeService.Now.AddDays(30).ToString()}')";
+
+            try
+            {
+                if(sqlConnection.State != System.Data.ConnectionState.Open)
+                {
+                    sqlConnection.Open();   
+                }
+
+                int impact = await sqlCommand.ExecuteNonQueryAsync();
+            }
+            catch(Exception ex)
+            {
+
+            }
+            finally
+            {
+                sqlCommand.Dispose();
+            }
 
 
         }

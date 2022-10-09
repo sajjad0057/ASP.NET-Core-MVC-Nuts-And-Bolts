@@ -10,6 +10,9 @@ namespace FirstDemo.Web.Controllers
         private readonly ILogger<HomeController> _logger;
 
         private static ICourseModel _courseModel;
+        
+
+        private readonly IDataUtility _dataUtility;
 
 
         //// **** Should not be used Model in Dependency Injection , although here we used Model Instance for create a Dependency Injection Examples **** 
@@ -28,12 +31,19 @@ namespace FirstDemo.Web.Controllers
             else
                 _courseModel = courseModel;
 
+            _dataUtility = dataUtility;
+
         }
 
-        public IActionResult Index(int id)
+        public async Task<IActionResult> Index(int id)
         {
             _logger.LogInformation("I am in index page .");     //// here .LogInformation , .LogWarning and Like others are called log levels . 
             ViewData["id"] = id;
+
+
+            //// Test for Ado.Net - 
+            await _dataUtility.InsertDataAsync();
+
             return View();
         }
 

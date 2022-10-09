@@ -2,6 +2,6 @@
 {
     public interface IDataUtility
     {
-        void InsertData();
+        Task InsertDataAsync();
     }
 }
