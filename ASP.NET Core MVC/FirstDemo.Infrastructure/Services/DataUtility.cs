@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
@@ -24,7 +25,7 @@ namespace FirstDemo.Infrastructure.Services
         }
 
 
-        private SqlCommand _PrepareCommand(string sql, Dictionary<string, object> parameters)
+        private SqlCommand _PrepareCommand(string sql, Dictionary<string, object> parameters, CommandType cmdType)
         {
             SqlConnection sqlConnection = new SqlConnection();
             sqlConnection.ConnectionString = _connectionString;
@@ -32,6 +33,9 @@ namespace FirstDemo.Infrastructure.Services
             SqlCommand sqlCommand = sqlConnection.CreateCommand();
             sqlCommand.Connection = sqlConnection;
             sqlCommand.CommandText = sql;
+
+            //// For using Stored Procedure - 
+            sqlCommand.CommandType = cmdType;
 
 
             if (parameters != null)
@@ -46,10 +50,10 @@ namespace FirstDemo.Infrastructure.Services
             return sqlCommand;
 
         }
-        public async Task ExecuteCommandAsync(string command,Dictionary<string,object> parameters)
+        public async Task ExecuteCommandAsync(string command,Dictionary<string,object> parameters,CommandType cmdType)
         {
 
-            using SqlCommand sqlCommand = _PrepareCommand(command, parameters);  
+            using SqlCommand sqlCommand = _PrepareCommand(command, parameters, cmdType);  
 
             try
             {
@@ -73,9 +77,9 @@ namespace FirstDemo.Infrastructure.Services
         }
 
 
-        public async Task<List<Dictionary<string, object>>> GetDataAsync(string command, Dictionary<string, object> parameters)
+        public async Task<List<Dictionary<string, object>>> GetDataAsync(string command, Dictionary<string, object> parameters, CommandType cmdType)
         {
-            using SqlCommand sqlCommand = _PrepareCommand(command, parameters);
+            using SqlCommand sqlCommand = _PrepareCommand(command, parameters, cmdType);
 
             List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
 
