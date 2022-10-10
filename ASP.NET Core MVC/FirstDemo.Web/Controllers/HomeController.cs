@@ -43,15 +43,19 @@ namespace FirstDemo.Web.Controllers
             ViewData["id"] = id;
 
             //// string sql = "delete from courses where Title = 'ADO.NET' ";
-            string sql = $"insert into Courses (Id,Title,Fees,ClassStartDate) values(@xId,@xTitle,@xFees,@xClassStartDate)";
-            
-            Dictionary<string, object> parameters = new Dictionary<string, object>();
-            parameters.Add("xId", Guid.NewGuid());
-            parameters.Add("xTitle","ADO.NET");
-            parameters.Add("xFees",3000);
-            parameters.Add("xClassStartDate", _timeService.Now.AddDays(30).ToString());
-            //// Test for Ado.Net - 
-            await _dataUtility.ExecuteCommandAsync(sql,parameters);
+            //string sql = $"insert into Courses (Id,Title,Fees,ClassStartDate) values(@xId,@xTitle,@xFees,@xClassStartDate)";
+
+            //Dictionary<string, object> parameters = new Dictionary<string, object>();
+            //parameters.Add("xId", Guid.NewGuid());
+            //parameters.Add("xTitle","ADO.NET");
+            //parameters.Add("xFees",3000);
+            //parameters.Add("xClassStartDate", _timeService.Now.AddDays(30).ToString());
+            ////// Test for Ado.Net - 
+            //await _dataUtility.ExecuteCommandAsync(sql,parameters);
+
+            string sql = "select * from Courses";
+
+            var data = await _dataUtility.GetDataAsync(sql, null);
 
             return View();
         }

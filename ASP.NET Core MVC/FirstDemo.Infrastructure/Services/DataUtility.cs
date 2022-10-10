@@ -73,10 +73,50 @@ namespace FirstDemo.Infrastructure.Services
         }
 
 
-        public void GetDataAsync(string command, Dictionary<string, object> parameters)
+        public async Task<List<Dictionary<string, object>>> GetDataAsync(string command, Dictionary<string, object> parameters)
         {
+            using SqlCommand sqlCommand = _PrepareCommand(command, parameters);
 
+            List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
+
+            try
+            {
+                if (sqlCommand.Connection.State != System.Data.ConnectionState.Open)
+                {
+                    sqlCommand.Connection.Open();
+
+                }
+
+                SqlDataReader reader =  await sqlCommand.ExecuteReaderAsync();
+
+
+                while (reader.Read())
+                {
+                    Dictionary<string, object> row = new Dictionary<string, object>();
+
+                    for (int i = 0; i < reader.FieldCount; i++)
+                    {
+                        row.Add(reader.GetName(i), reader.GetValue(i));
+                    }
+
+                    rows.Add(row);
+
+                }
+
+
+            }
+            catch(Exception ex)
+            {
+
+            }
+            finally
+            {
+
+            }
+
+            return rows;
         }
+
 
     }
 }
