@@ -4,7 +4,10 @@
     public enum ResponseTypes
     {
         Success,
-        Danger
+        Warning,
+        Info,
+        Danger,
+
     }
 
 

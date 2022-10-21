@@ -18,12 +18,14 @@
                 <form role="form" asp-antiforgery="true" asp-area="Admin"
                       asp-controller="Course" asp-action="Create" method="post">
                     <div class="card-body">
+                        <div asp-validation-summary="All" class="text-danger"></div>
                         <div class="form-group">
                             <label asp-for="Title"></label>
                             <input type="text"
                                    asp-for="Title"
                                    class="form-control"
                                    placeholder="Enter Course Title" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="Fees"></label>
@@ -31,6 +33,7 @@
                                    asp-for="Fees"
                                    class="form-control"
                                    placeholder="Enter Course Fees" />
+                            <span asp-validation-for="Fees" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="ClassStartDate"></label>
@@ -38,6 +41,7 @@
                                    asp-for="ClassStartDate"
                                    class="form-control"
                                    placeholder="Class Start Date" />
+                            <span asp-validation-for="ClassStartDate" class="text-danger"></span>
                         </div>
                     </div>
                     <!-- /.card-body -->
@@ -57,3 +61,8 @@
     <!-- /.row -->
 </div>
 <!-- /.container-fluid -->
+
+<!--For ClientSide Validations -->
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

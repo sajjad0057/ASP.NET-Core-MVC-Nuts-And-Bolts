@@ -53,9 +53,9 @@ namespace FirstDemo.Web.Controllers
             ////// Test for Ado.Net - 
             //await _dataUtility.ExecuteCommandAsync(sql,parameters);
 
-            string sql = "GetCourses";   //// Here , "GetCourses" is Stored Procedure name, that position in Database StoredProcedure folder - 
+            //string sql = "GetCourses";   //// Here , "GetCourses" is Stored Procedure name, that position in Database StoredProcedure folder - 
 
-            var data = await _dataUtility.GetDataAsync(sql, null, System.Data.CommandType.StoredProcedure);
+            //var data = await _dataUtility.GetDataAsync(sql, null, System.Data.CommandType.StoredProcedure);
 
             return View();
         }
