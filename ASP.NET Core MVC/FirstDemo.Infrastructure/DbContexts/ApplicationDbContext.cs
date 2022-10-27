@@ -1,4 +1,5 @@
 ﻿using FirstDemo.Infrastructure.Entities;
+using FirstDemo.Infrastructure.Seeds;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -69,6 +70,12 @@ namespace FirstDemo.Infrastructure.DbContexts
                 .HasOne(s => s.Student)
                 .WithMany(sc => sc.StudentCourses)
                 .HasForeignKey(x => x.StudentId);
+
+
+
+            //// For data Seeding in Student Table 
+            
+            modelBuilder.Entity<Student>().HasData(new StudentSeed().Students);
 
 
 
