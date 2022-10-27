@@ -29,7 +29,7 @@ try
     {
         //// here , can load one / more module that need for binding .
         containerBuilder.RegisterModule(new WebModule());  //// it's for Web project dependency binding
-        
+
         containerBuilder.RegisterModule(new InfrastructureModule(connectionString, assemblyName)); //// it's for Infrastructure project dependency binding
     });
 
@@ -68,7 +68,7 @@ try
 
 
     #region Config AutoMapper
-    
+
     builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
     #endregion
@@ -125,7 +125,7 @@ try
     app.Run();
 
 }
-catch(Exception ex)
+catch (Exception ex)
 {
     Log.Fatal(ex, "Application start-up failed .");
 }
