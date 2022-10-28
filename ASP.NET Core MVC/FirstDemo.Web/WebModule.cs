@@ -32,6 +32,10 @@ namespace FirstDemo.Web
             builder.RegisterType<CourseListModel>().AsSelf();
             builder.RegisterType<CourseEditModel>().AsSelf();
 
+            builder.RegisterType<RegisterModel>().AsSelf();
+
+
+
 
             base.Load(builder);
         }
