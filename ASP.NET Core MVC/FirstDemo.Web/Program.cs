@@ -2,6 +2,8 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using FirstDemo.Infrastructure;
 using FirstDemo.Infrastructure.DbContexts;
+using FirstDemo.Infrastructure.Entities;
+using FirstDemo.Infrastructure.Services;
 using FirstDemo.Web;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -67,19 +69,39 @@ try
     #endregion
 
 
-    #region Config AutoMapper
 
-    builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-    #endregion
 
 
     builder.Services.AddDbContext<ApplicationDbContext>(options =>
         options.UseSqlServer(connectionString, m => m.MigrationsAssembly(assemblyName)));
     builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-    builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-        .AddEntityFrameworkStores<ApplicationDbContext>();
+    #region Config AutoMapper
+    builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+    #endregion
+
+
+
+    #region ForDefaultIdentityManagement
+    ////builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    ////    .AddEntityFrameworkStores<ApplicationDbContext>();
+    #endregion
+
+
+    #region ForCustomizeIdentityManagement
+
+    builder.Services
+        .AddIdentity<ApplicationUser, ApplicationRole>()
+        .AddEntityFrameworkStores<ApplicationDbContext>()
+        .AddUserManager<ApplicationUserManager>()
+        .AddRoleManager<ApplicationRoleManager>()
+        .AddSignInManager<ApplicationSignInManager>()
+        .AddDefaultTokenProviders();
+
+    #endregion
+
+
+
     builder.Services.AddControllersWithViews();
 
     var app = builder.Build();
