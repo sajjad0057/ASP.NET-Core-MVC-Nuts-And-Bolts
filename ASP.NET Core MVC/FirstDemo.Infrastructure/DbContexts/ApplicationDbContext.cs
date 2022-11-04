@@ -74,7 +74,7 @@ namespace FirstDemo.Infrastructure.DbContexts
 
 
             //// For data Seeding in Student Table 
-            
+
             modelBuilder.Entity<Student>().HasData(new StudentSeed().Students);
 
 

@@ -1,9 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using FirstDemo.Infrastructure.Entities;
 using System.Linq.Expressions;
-using FirstDemo.Infrastructure.Entities;
 
 namespace FirstDemo.Infrastructure.Repositories
 {

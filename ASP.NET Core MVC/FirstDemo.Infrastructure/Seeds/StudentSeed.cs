@@ -1,9 +1,4 @@
 ﻿using FirstDemo.Infrastructure.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FirstDemo.Infrastructure.Seeds
 {
@@ -21,6 +16,6 @@ namespace FirstDemo.Infrastructure.Seeds
                     new Student { Id = new Guid("18587525-9ecc-42e1-bf5a-511cc1fa4a0e"),Name="Student 4",Address = "Natore",Cgpa = 3.50 },
                 };
             }
-        } 
+        }
     }
 }

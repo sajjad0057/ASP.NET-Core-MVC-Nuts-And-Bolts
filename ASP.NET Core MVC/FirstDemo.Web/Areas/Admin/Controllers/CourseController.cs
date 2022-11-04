@@ -1,28 +1,27 @@
-﻿using FirstDemo.Web.Areas.Admin.Models;
-using Microsoft.AspNetCore.Mvc;
-using Autofac;
-using FirstDemo.Web.Models;
-using FirstDemo.Web.Codes;
+﻿using Autofac;
 using FirstDemo.Infrastructure.Exceptions;
-using Microsoft.Extensions.Logging;
+using FirstDemo.Web.Areas.Admin.Models;
+using FirstDemo.Web.Codes;
+using FirstDemo.Web.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FirstDemo.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class CourseController : Controller
     {
-        
-        private readonly  ILifetimeScope _scope;        //// Autofac Container . 
+
+        private readonly ILifetimeScope _scope;        //// Autofac Container . 
 
         private readonly ILogger<CourseController> _logger;
 
-        public CourseController(ILogger<CourseController> logger, ILifetimeScope scope )
+        public CourseController(ILogger<CourseController> logger, ILifetimeScope scope)
         {
             _scope = scope;
             _logger = logger;
         }
 
-        public IActionResult Index()       
+        public IActionResult Index()
         {
             return View();
         }
@@ -76,7 +75,7 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
                     _logger.LogError(ioe, ioe.Message);
 
                     ////for showing duplicateException Message in Client Side Validation Message Showing Section.
-                    ModelState.AddModelError("",ioe.Message);
+                    ModelState.AddModelError("", ioe.Message);
 
 
                     TempData.Put<ResponseModel>("ResponseMessage", new ResponseModel
@@ -85,7 +84,7 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
                         Type = ResponseTypes.Warning
                     });
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     _logger.LogError(ex, ex.Message);
                     TempData.Put<ResponseModel>("ResponseMessage", new ResponseModel
@@ -94,8 +93,8 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
                         Type = ResponseTypes.Danger
                     });
                 }
-                
-            }                       
+
+            }
             else
             {
 
@@ -103,13 +102,13 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
                 string messageText = string.Empty;
                 foreach (var message in ModelState.Values)
                 {
-                    for ( int i = 0; i < message.Errors.Count(); i++)
+                    for (int i = 0; i < message.Errors.Count(); i++)
                     {
                         messageText += $"{message.Errors[i].ErrorMessage}";
 
-                        
+
                     }
-                    
+
                 }
                 TempData.Put<ResponseModel>("ResponseMessage", new ResponseModel
                 {
@@ -161,7 +160,7 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
 
                     return RedirectToAction("Index");
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     _logger.LogError(ex, ex.Message);
                     TempData.Put<ResponseModel>("ResponseMessage", new ResponseModel
@@ -192,7 +191,7 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
                     Type = ResponseTypes.Success
                 });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
                 TempData.Put<ResponseModel>("ResponseMessage", new ResponseModel

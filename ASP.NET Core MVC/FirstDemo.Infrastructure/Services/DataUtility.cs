@@ -1,13 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace FirstDemo.Infrastructure.Services
 {
@@ -15,13 +8,13 @@ namespace FirstDemo.Infrastructure.Services
     {
 
         private readonly string _connectionString;
-        
+
 
         //// From IConfiguration, can Access  appsettings.json file all info -
         public DataUtility(IConfiguration config)
         {
             _connectionString = config.GetConnectionString("DefaultConnection");
-            
+
         }
 
 
@@ -50,21 +43,21 @@ namespace FirstDemo.Infrastructure.Services
             return sqlCommand;
 
         }
-        public async Task ExecuteCommandAsync(string command,Dictionary<string,object> parameters,CommandType cmdType)
+        public async Task ExecuteCommandAsync(string command, Dictionary<string, object> parameters, CommandType cmdType)
         {
 
-            using SqlCommand sqlCommand = _PrepareCommand(command, parameters, cmdType);  
+            using SqlCommand sqlCommand = _PrepareCommand(command, parameters, cmdType);
 
             try
             {
-                if(sqlCommand.Connection.State != System.Data.ConnectionState.Open)
+                if (sqlCommand.Connection.State != System.Data.ConnectionState.Open)
                 {
-                    sqlCommand.Connection.Open();   
+                    sqlCommand.Connection.Open();
                 }
 
                 int impact = await sqlCommand.ExecuteNonQueryAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
@@ -91,7 +84,7 @@ namespace FirstDemo.Infrastructure.Services
 
                 }
 
-                SqlDataReader reader =  await sqlCommand.ExecuteReaderAsync();
+                SqlDataReader reader = await sqlCommand.ExecuteReaderAsync();
 
 
                 while (reader.Read())
@@ -109,7 +102,7 @@ namespace FirstDemo.Infrastructure.Services
 
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }

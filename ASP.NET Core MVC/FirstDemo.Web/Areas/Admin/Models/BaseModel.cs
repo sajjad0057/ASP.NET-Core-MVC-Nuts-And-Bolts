@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using FirstDemo.Infrastructure.Services;
 
 namespace FirstDemo.Web.Areas.Admin.Models
 {

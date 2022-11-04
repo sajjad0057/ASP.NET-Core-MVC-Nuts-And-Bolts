@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.Extensions.Primitives;
 using System.Text;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Primitives;
 
 namespace FirstDemo.Web.Models
 {
@@ -85,7 +81,7 @@ namespace FirstDemo.Web.Models
                 throw new InvalidOperationException("Http method not supported, use get or post");
         }
 
-        private string ReadValues(IEnumerable<KeyValuePair<string, StringValues>> 
+        private string ReadValues(IEnumerable<KeyValuePair<string, StringValues>>
             requestValues, string[] columnNames)
         {
             var sortText = new StringBuilder();

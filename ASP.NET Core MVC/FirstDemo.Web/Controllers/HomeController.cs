@@ -10,14 +10,14 @@ namespace FirstDemo.Web.Controllers
         private readonly ILogger<HomeController> _logger;
 
         private static ICourseModel _courseModel;
-        
+
 
         private readonly IDataUtility _dataUtility;
         private readonly ITimeService _timeService;
 
 
         //// **** Should not be used Model in Dependency Injection , although here we used Model Instance for create a Dependency Injection Examples **** 
-        public HomeController(ILogger<HomeController> logger,ICourseModel courseModel,
+        public HomeController(ILogger<HomeController> logger, ICourseModel courseModel,
             IDataUtility dataUtility, ITimeService timeService)
         {
             _logger = logger;

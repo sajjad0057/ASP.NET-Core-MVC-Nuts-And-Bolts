@@ -32,7 +32,11 @@ namespace FirstDemo.Web
             builder.RegisterType<CourseListModel>().AsSelf();
             builder.RegisterType<CourseEditModel>().AsSelf();
 
+
+            //// Identity Related binding -
+
             builder.RegisterType<RegisterModel>().AsSelf();
+            builder.RegisterType<LoginModel>().AsSelf();
 
 
 

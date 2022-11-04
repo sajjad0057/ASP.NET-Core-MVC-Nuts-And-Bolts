@@ -17,23 +17,23 @@ namespace FirstDemo.Web.Areas.Admin.Models
         private IMapper _mapper;
 
 
-        public CourseEditModel():base()
+        public CourseEditModel() : base()
         {
 
         }
 
 
-        public CourseEditModel(ICourseService courseService,IMapper mapper)
+        public CourseEditModel(ICourseService courseService, IMapper mapper)
         {
             _courseService = courseService;
             _mapper = mapper;
-        }   
+        }
 
         public void LoadData(Guid id)
         {
             CourseBO course = _courseService.GetCourse(id);
 
-            if(course != null)
+            if (course != null)
             {
                 _mapper.Map(course, this);
             }

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using FirstDemo.Web.Areas.Admin.Models;
-using Microsoft.Build.Framework;
 using CourseBO = FirstDemo.Infrastructure.BusinessObjects.Course;
 
 
@@ -11,7 +10,7 @@ namespace FirstDemo.Web.Profiles
         public WebProfile()
         {
             CreateMap<CourseCreateModel, CourseBO>()
-                .ForMember(dest=>dest.Name , src => src.MapFrom(x=>x.Title))
+                .ForMember(dest => dest.Name, src => src.MapFrom(x => x.Title))
                 .ReverseMap();
 
 
