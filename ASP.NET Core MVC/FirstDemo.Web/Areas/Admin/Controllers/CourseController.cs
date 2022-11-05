@@ -3,11 +3,13 @@ using FirstDemo.Infrastructure.Exceptions;
 using FirstDemo.Web.Areas.Admin.Models;
 using FirstDemo.Web.Codes;
 using FirstDemo.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FirstDemo.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class CourseController : Controller
     {
 

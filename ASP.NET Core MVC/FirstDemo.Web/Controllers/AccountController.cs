@@ -56,7 +56,14 @@ namespace FirstDemo.Web.Controllers
             model.ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser 
+                { 
+                    UserName = model.Email, 
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName 
+                };
+
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -67,7 +74,12 @@ namespace FirstDemo.Web.Controllers
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
                         pageHandler: null,
-                        values: new { area = "", userId = user.Id, code = code, returnUrl = model.ReturnUrl },
+                        values: new { 
+                            area = "", 
+                            userId = user.Id, 
+                            code = code, 
+                            returnUrl = model.ReturnUrl 
+                        },
                         protocol: Request.Scheme);
 
                     ////await _emailSender.SendEmailAsync(model.Email, "Confirm your email",
