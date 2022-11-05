@@ -9,11 +9,11 @@ namespace FirstDemo.Web
     {
         protected override void Load(ContainerBuilder builder)
         {
-            // builder.RegisterType<CourseModel>().As<ICourseModel>();  ///// it's like work as AddTransient<>() ServiceCollections Method
+            //// builder.RegisterType<CourseModel>().As<ICourseModel>();  ///// it's like work as AddTransient<>() ServiceCollections Method
 
-            //builder.RegisterType<CourseModel>().As<ICourseModel>()   //// it's like work as AddSingleton<>() ServiceCollections Method,provide single intance for single request.
-            //    .SingleInstance()
-            //    .InstancePerLifetimeScope();
+            ////builder.RegisterType<CourseModel>().As<ICourseModel>()   //// it's like work as AddSingleton<>() ServiceCollections Method,provide single intance for single request.
+            ////    .SingleInstance()
+            ////    .InstancePerLifetimeScope();
 
             builder.RegisterType<CourseModel>().As<ICourseModel>()   //// it's like work as AddSingleton<>() ServiceCollections Method,provide single intance for all request .
                 .SingleInstance();
@@ -22,8 +22,8 @@ namespace FirstDemo.Web
             //// InstancePerLifetimeScope() method keeps a single instance for single request .
 
 
-            //builder.RegisterType<CourseModel>().As<ICourseModel>()   //// here class create with IClass Interface .
-            //    .InstancePerLifetimeScope();
+            ////builder.RegisterType<CourseModel>().As<ICourseModel>()   //// here class create with IClass Interface .
+            ////    .InstancePerLifetimeScope();
 
             builder.RegisterType<CourseModel>().AsSelf();      //// here , instance create with only Class  .
 

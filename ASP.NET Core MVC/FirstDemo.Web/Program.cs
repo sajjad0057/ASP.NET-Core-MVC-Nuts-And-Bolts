@@ -5,6 +5,7 @@ using FirstDemo.Infrastructure.DbContexts;
 using FirstDemo.Infrastructure.Entities;
 using FirstDemo.Infrastructure.Services;
 using FirstDemo.Web;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -20,7 +21,7 @@ try
 
     var builder = WebApplication.CreateBuilder(args);
 
-    // Add services to the container.
+    //// Add services to the container.
     var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
     var assemblyName = Assembly.GetExecutingAssembly().FullName;
 
@@ -100,6 +101,44 @@ try
         .AddSignInManager<ApplicationSignInManager>()
         .AddDefaultTokenProviders();
 
+
+
+    builder.Services
+        .AddAuthentication()
+        .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+        {
+            options.LoginPath = new PathString("/Account/Login");
+            options.AccessDeniedPath = new PathString("/Account/Login");
+            options.LogoutPath = new PathString("/Account/Logout");
+            options.Cookie.Name = "FirstDemoPortal.Identity";
+            options.SlidingExpiration = true;
+            options.ExpireTimeSpan = TimeSpan.FromHours(1);
+        });
+
+
+    builder.Services
+        .Configure<IdentityOptions>(options =>
+        {
+            // Password settings.
+            options.Password.RequireDigit = true;
+            options.Password.RequireLowercase = false;
+            options.Password.RequireNonAlphanumeric = false;
+            options.Password.RequireUppercase = false;
+            options.Password.RequiredLength = 6;
+            options.Password.RequiredUniqueChars = 0;
+
+            // Lockout settings.
+            options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+            options.Lockout.MaxFailedAccessAttempts = 5;
+            options.Lockout.AllowedForNewUsers = true;
+
+            // User settings.
+            options.User.AllowedUserNameCharacters =
+            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+            options.User.RequireUniqueEmail = true;
+        });
+
+
     #endregion
 
 
@@ -144,7 +183,6 @@ try
         pattern: "{controller=Home}/{action=Index}/{id?}");
 
 
-    app.MapRazorPages();
 
     app.Run();
 

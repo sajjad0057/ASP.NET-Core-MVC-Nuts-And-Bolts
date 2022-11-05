@@ -7,9 +7,11 @@ namespace FirstDemo.Infrastructure.DbContexts
 {
 
     /*
-    IdentityDbContext class basically provide by default login, logout , or auth features 
+    IdentityDbContext class basically provide by default login, logout , or auth features,
+    here pass generic arguments for Customize Identity Related Entities
     */
-    public class ApplicationDbContext : IdentityDbContext, IApplicationDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid,
+        ApplicationUserClaim, ApplicationUserRole, ApplicationUserLogin, ApplicationRoleClaim, ApplicationUserToken>, IApplicationDbContext
     {
         private readonly string _connectingString;
         private readonly string _migrationAssemblyName;
