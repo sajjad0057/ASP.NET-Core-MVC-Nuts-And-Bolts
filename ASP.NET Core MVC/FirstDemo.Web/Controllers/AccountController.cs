@@ -12,6 +12,7 @@ using System.Text.Encodings.Web;
 
 namespace FirstDemo.Web.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
