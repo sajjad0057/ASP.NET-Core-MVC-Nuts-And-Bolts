@@ -84,7 +84,7 @@ namespace FirstDemo.Web.Controllers
 
                     //// add Roles to user when registering new user - 
 
-                    await _userManager.AddToRolesAsync(user, new string[] { "Teacher" });
+                    await _userManager.AddToRolesAsync(user, new string[] { "Teacher", "Admin" });
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

@@ -142,7 +142,37 @@ try
     #endregion
 
 
-  
+    #region Policy based and Claim based Authorization
+
+    builder.Services.AddAuthorization(options =>
+    {
+        options.AddPolicy("CourseManagementPolicy", policy =>
+        {
+            policy.RequireAuthenticatedUser();
+            policy.RequireRole("Admin");
+            policy.RequireRole("Teacher");
+        });
+
+        //options.AddPolicy("CourseViewPolicy", policy =>
+        //{
+        //    policy.RequireAuthenticatedUser();
+        //    policy.RequireClaim("ViewCourse", "true");
+        //});
+        //options.AddPolicy("CourseCreatePolicy", policy =>
+        //{
+        //    policy.RequireAuthenticatedUser();
+        //    policy.RequireClaim("CreateCourse", "true");
+        //});
+
+        //options.AddPolicy("CourseViewRequirementPolicy", policy =>
+        //{
+        //    policy.RequireAuthenticatedUser();
+        //    policy.Requirements.Add(new CourseViewRequirement());
+        //});
+
+    });
+
+    #endregion
 
 
 
