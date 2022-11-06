@@ -2,6 +2,7 @@
 using FirstDemo.Infrastructure.Entities;
 using FirstDemo.Web.Models;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -37,7 +38,7 @@ namespace FirstDemo.Web.Controllers
         }
 
 
-
+        [AllowAnonymous]
         public async Task<IActionResult> Register(string? returnUrl = null)
         {
             var model = _scope.Resolve<RegisterModel>();
@@ -50,6 +51,7 @@ namespace FirstDemo.Web.Controllers
 
 
         [HttpPost, ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public async Task<IActionResult> Register(RegisterModel model)
         {
             model.ReturnUrl ??= Url.Content("~/");
@@ -106,6 +108,8 @@ namespace FirstDemo.Web.Controllers
         }
 
 
+
+        [AllowAnonymous]
         public async Task<IActionResult> Login(string? returnUrl = null)
         {
             var model = _scope.Resolve<LoginModel>();
@@ -122,6 +126,7 @@ namespace FirstDemo.Web.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(LoginModel model)
         {
             model.ReturnUrl ??= Url.Content("~/");
@@ -156,6 +161,27 @@ namespace FirstDemo.Web.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Logout(string? returnUrl = null)
+        {
+            await _signInManager.SignOutAsync();
+            if (returnUrl != null)
+            {
+                return LocalRedirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToAction();
+            }
+        }
+
+        [AllowAnonymous]
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
 
 
