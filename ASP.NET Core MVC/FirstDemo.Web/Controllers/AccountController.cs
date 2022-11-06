@@ -17,17 +17,20 @@ namespace FirstDemo.Web.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<AccountController> _logger;
+        private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly ILifetimeScope _scope;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<AccountController> logger,
+            RoleManager<ApplicationRole> roleManager,
             ILifetimeScope scope)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _roleManager = roleManager;
             _scope = scope;
         }
 
@@ -58,29 +61,41 @@ namespace FirstDemo.Web.Controllers
             model.ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser 
-                { 
-                    UserName = model.Email, 
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
                     Email = model.Email,
                     FirstName = model.FirstName,
-                    LastName = model.LastName 
+                    LastName = model.LastName
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
+
+                /* Create Roles Here (But should not create roles here ,we create here tesing purpose - 
+                 (it should be creating roles for Roles table using data seeding ) ) */
+
+                ////await _roleManager.CreateAsync(new ApplicationRole("Admin"));
+                ////await _roleManager.CreateAsync(new ApplicationRole("Teacher"));
+
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+                    //// add Roles to user when registering new user - 
+
+                    await _userManager.AddToRolesAsync(user, new string[] { "Teacher" });
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
                         pageHandler: null,
-                        values: new { 
-                            area = "", 
-                            userId = user.Id, 
-                            code = code, 
-                            returnUrl = model.ReturnUrl 
+                        values: new
+                        {
+                            area = "",
+                            userId = user.Id,
+                            code = code,
+                            returnUrl = model.ReturnUrl
                         },
                         protocol: Request.Scheme);
 

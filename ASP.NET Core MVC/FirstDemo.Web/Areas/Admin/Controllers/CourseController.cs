@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FirstDemo.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles ="Admin")]
     public class CourseController : Controller
     {
 
