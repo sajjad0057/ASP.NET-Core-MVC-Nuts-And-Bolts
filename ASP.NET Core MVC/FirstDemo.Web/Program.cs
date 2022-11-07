@@ -3,9 +3,11 @@ using Autofac.Extensions.DependencyInjection;
 using FirstDemo.Infrastructure;
 using FirstDemo.Infrastructure.DbContexts;
 using FirstDemo.Infrastructure.Entities;
+using FirstDemo.Infrastructure.Securities;
 using FirstDemo.Infrastructure.Services;
 using FirstDemo.Web;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -144,6 +146,7 @@ try
 
     #region Policy based and Claim based Authorization
 
+
     builder.Services.AddAuthorization(options =>
     {
         options.AddPolicy("CourseManagementPolicy", policy =>
@@ -153,24 +156,29 @@ try
             policy.RequireRole("Teacher");
         });
 
-        //options.AddPolicy("CourseViewPolicy", policy =>
-        //{
-        //    policy.RequireAuthenticatedUser();
-        //    policy.RequireClaim("ViewCourse", "true");
-        //});
-        //options.AddPolicy("CourseCreatePolicy", policy =>
-        //{
-        //    policy.RequireAuthenticatedUser();
-        //    policy.RequireClaim("CreateCourse", "true");
-        //});
+        options.AddPolicy("CourseViewPolicy", policy =>
+        {
+            policy.RequireAuthenticatedUser();
+            policy.RequireClaim("ViewCourse", "true");
+        });
 
-        //options.AddPolicy("CourseViewRequirementPolicy", policy =>
-        //{
-        //    policy.RequireAuthenticatedUser();
-        //    policy.Requirements.Add(new CourseViewRequirement());
-        //});
+        options.AddPolicy("CourseCreatePolicy", policy =>
+        {
+            policy.RequireAuthenticatedUser();
+            policy.RequireClaim("CreateCourse", "true");
+        });
+
+        options.AddPolicy("CourseViewRequirementPolicy", policy =>
+        {
+            policy.RequireAuthenticatedUser();
+            policy.Requirements.Add(new CourseViewRequirement());
+        });
 
     });
+
+
+
+    builder.Services.AddSingleton<IAuthorizationHandler, CourseViewRequirementHandler>();
 
     #endregion
 

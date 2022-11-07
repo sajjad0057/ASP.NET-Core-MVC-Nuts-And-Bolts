@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FirstDemo.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Policy ="CourseManagementPolicy")]
+    
     public class CourseController : Controller
     {
 
@@ -23,11 +23,13 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
             _logger = logger;
         }
 
+        [Authorize(Policy = "CourseViewRequirementPolicy")]
         public IActionResult Index()
         {
             return View();
         }
 
+        [Authorize(Policy = "CourseCreatePolicy")]
         public IActionResult Create()
         {
             /* here create automatically CourseCreateModel object, with his parameter using autofac container (_scope);
@@ -54,6 +56,7 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
         */
         //// For receiving POST data --
         [HttpPost, ValidateAntiForgeryToken]
+        [Authorize(Policy = "CourseViewPolicy")]
         public async Task<IActionResult> Create(CourseCreateModel model)
         {
             if (ModelState.IsValid)     //// Here , ModelState.IsValid property comming from Controller parent class

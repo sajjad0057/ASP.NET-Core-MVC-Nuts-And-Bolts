@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
+using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
 
@@ -72,11 +73,12 @@ namespace FirstDemo.Web.Controllers
 
                 var result = await _userManager.CreateAsync(user, model.Password);
 
-                /* Create Roles Here (But should not create roles here ,we create here tesing purpose - 
-                 (it should be creating roles for Roles table using data seeding ) ) */
+                /* Create Roles  Here (But should not create  here ,we create Roles here tesing purpose - 
+                 (it should be creating rolesfor Roles table using data seeding ) ) */
 
                 ////await _roleManager.CreateAsync(new ApplicationRole("Admin"));
                 ////await _roleManager.CreateAsync(new ApplicationRole("Teacher"));
+                
 
                 if (result.Succeeded)
                 {
@@ -84,7 +86,14 @@ namespace FirstDemo.Web.Controllers
 
                     //// add Roles to user when registering new user - 
 
-                    await _userManager.AddToRolesAsync(user, new string[] { "Teacher", "Admin" });
+                    //await _userManager.AddToRolesAsync(user, new string[] { "Teacher", "Admin" });
+
+                    //// add claims to user when registering new user - 
+                    await _userManager.AddClaimsAsync(user, new Claim[] 
+                    { 
+                        new Claim("ViewCourse", "true"), 
+                        new Claim("CreateCourse", "true")
+                    });
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
