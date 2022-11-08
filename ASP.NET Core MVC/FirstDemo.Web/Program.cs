@@ -174,6 +174,7 @@ try
             policy.Requirements.Add(new CourseViewRequirement());
         });
 
+
     });
 
 
