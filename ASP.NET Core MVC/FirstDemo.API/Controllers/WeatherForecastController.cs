@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FirstDemo.API.Controllers
@@ -19,6 +20,7 @@ namespace FirstDemo.API.Controllers
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
+        [Authorize(Policy = "CourseViewRequirementPolicy")]
         public IEnumerable<WeatherForecast> Get()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
