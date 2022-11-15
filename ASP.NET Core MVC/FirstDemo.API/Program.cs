@@ -13,6 +13,9 @@ using System.Text;
 using FirstDemo.API;
 using FirstDemo.Infrastructure;
 using FirstDemo.Infrastructure.DbContexts;
+using FirstDemo.Infrastructure.Entities;
+using FirstDemo.Infrastructure.Services;
+using FirstDemo.Infrastructure.Securities;
 
 
 
@@ -24,6 +27,7 @@ builder.Host.UseSerilog((ctx, lc) => lc
     .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
     .Enrich.FromLogContext()
     .ReadFrom.Configuration(builder.Configuration));
+
 
 try
 {
@@ -43,63 +47,72 @@ try
     builder.Services.AddDatabaseDeveloperPageExceptionFilter();
     builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-    //builder.Services
-    //.AddIdentity<ApplicationUser, ApplicationRole>()
-    //.AddEntityFrameworkStores<ApplicationDbContext>()
-    //.AddUserManager<ApplicationUserManager>()
-    //.AddRoleManager<ApplicationRoleManager>()
-    //.AddSignInManager<ApplicationSignInManager>()
-    //.AddDefaultTokenProviders();
 
-    //builder.Services.AddAuthentication()
-    //.AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, x =>
-    //{
-    //    x.RequireHttpsMetadata = false;
-    //    x.SaveToken = true;
-    //    x.TokenValidationParameters = new TokenValidationParameters
-    //    {
-    //        ValidateIssuerSigningKey = true,
-    //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration["Jwt:Key"])),
-    //        ValidateIssuer = true,
-    //        ValidateAudience = true,
-    //        ValidIssuer = builder.Configuration["Jwt:Issuer"],
-    //        ValidAudience = builder.Configuration["Jwt:Audience"],
-    //    };
-    //});
 
-    //builder.Services.Configure<IdentityOptions>(options =>
-    //{
-    //    // Password settings.
-    //    options.Password.RequireDigit = true;
-    //    options.Password.RequireLowercase = false;
-    //    options.Password.RequireNonAlphanumeric = false;
-    //    options.Password.RequireUppercase = false;
-    //    options.Password.RequiredLength = 6;
-    //    options.Password.RequiredUniqueChars = 0;
+    #region ForCustomizeIdentityManagement
 
-    //    // Lockout settings.
-    //    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-    //    options.Lockout.MaxFailedAccessAttempts = 5;
-    //    options.Lockout.AllowedForNewUsers = true;
 
-    //    // User settings.
-    //    options.User.AllowedUserNameCharacters =
-    //    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-    //    options.User.RequireUniqueEmail = true;
-    //});
+    builder.Services
+    .AddIdentity<ApplicationUser, ApplicationRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddUserManager<ApplicationUserManager>()
+    .AddRoleManager<ApplicationRoleManager>()
+    .AddSignInManager<ApplicationSignInManager>()
+    .AddDefaultTokenProviders();
 
-    //builder.Services.AddAuthorization(options =>
-    //{
-    //    options.AddPolicy("CourseViewRequirementPolicy", policy =>
-    //    {
-    //        policy.AuthenticationSchemes.Clear();
-    //        policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
-    //        policy.RequireAuthenticatedUser();
-    //        policy.Requirements.Add(new CourseViewRequirement());
-    //    });
-    //});
+    ////For JWT Configuration - 
+    builder.Services.AddAuthentication()
+    .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, x =>
+    {
+        x.RequireHttpsMetadata = false;
+        x.SaveToken = true;
+        x.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration["Jwt:Key"])),
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+        };
+    });
 
-    //builder.Services.AddSingleton<IAuthorizationHandler, CourseViewRequirementHandler>();
+    builder.Services.Configure<IdentityOptions>(options =>
+    {
+        // Password settings.
+        options.Password.RequireDigit = true;
+        options.Password.RequireLowercase = false;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireUppercase = false;
+        options.Password.RequiredLength = 6;
+        options.Password.RequiredUniqueChars = 0;
+
+        // Lockout settings.
+        options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+        options.Lockout.MaxFailedAccessAttempts = 5;
+        options.Lockout.AllowedForNewUsers = true;
+
+        // User settings.
+        options.User.AllowedUserNameCharacters =
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+        options.User.RequireUniqueEmail = true;
+    });
+
+    builder.Services.AddAuthorization(options =>
+    {
+        options.AddPolicy("CourseViewRequirementPolicy", policy =>
+        {
+            policy.AuthenticationSchemes.Clear();
+            policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
+            policy.RequireAuthenticatedUser();
+            policy.Requirements.Add(new CourseViewRequirement());
+        });
+    });
+
+    builder.Services.AddSingleton<IAuthorizationHandler, CourseViewRequirementHandler>();
+
+    #endregion
+
 
     builder.Services.AddControllers();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

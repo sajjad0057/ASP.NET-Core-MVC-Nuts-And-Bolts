@@ -59,6 +59,12 @@ namespace FirstDemo.Infrastructure
                 .InstancePerLifetimeScope();
 
 
+            ////For FirstDemo.API project - 
+
+            builder.RegisterType<TokenService>().As<ITokenService>()
+                .InstancePerLifetimeScope();
+
+
 
 
             base.Load(builder);
