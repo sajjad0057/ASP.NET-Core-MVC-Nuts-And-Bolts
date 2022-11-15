@@ -18,10 +18,22 @@ using System.Reflection;
 
 
 
+var builder = WebApplication.CreateBuilder(args);
+
+#region Serilog (Logger) Configuration 
+
+builder.Host.UseSerilog((ctx, lc) => lc
+    .MinimumLevel.Debug()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+    .Enrich.FromLogContext()
+    .ReadFrom.Configuration(builder.Configuration)
+    );
+
+#endregion
+
+
 try
 {
-
-    var builder = WebApplication.CreateBuilder(args);
 
     //// Add services to the container.
     var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -58,20 +70,6 @@ try
     //builder.Services.AddScoped<ICourseModel, CourseModel>();
 
     #endregion
-
-
-    #region Serilog (Logger) Configuration 
-
-    builder.Host.UseSerilog((ctx, lc) => lc
-        .MinimumLevel.Debug()
-        .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
-        .Enrich.FromLogContext()
-        .ReadFrom.Configuration(builder.Configuration)
-        );
-
-    #endregion
-
-
 
 
 
