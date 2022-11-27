@@ -45,7 +45,10 @@ try
     builder.Services.AddDbContext<ApplicationDbContext>(options =>
         options.UseSqlServer(connectionString, m => m.MigrationsAssembly(assemblyName)));
     builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+    #region forAutoMapperConfiguration
     builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+    #endregion
 
 
 

@@ -62,7 +62,7 @@ namespace FirstDemo.Infrastructure.Services
 
 
 
-        public void DeteleCourse(Guid id)
+        public void DeleteCourse(Guid id)
         {
             _applicationUnitOfWork.Courses.Remove(id);
             _applicationUnitOfWork.Save();
@@ -91,5 +91,40 @@ namespace FirstDemo.Infrastructure.Services
                 throw new InvalidOperationException(" Course Doesn't Exists !");
             }
         }
+
+        public CourseBO GetCourse(string name)
+        {
+            var courseEO = _applicationUnitOfWork.Courses.Get(x => x.Title.Equals(name), "")
+                .FirstOrDefault();
+
+            CourseBO courseBO = _mapper.Map<CourseBO>(courseEO);
+
+            return courseBO;
+        }
+
+        public CourseBO GetCourses(Guid id)
+        {
+            var courseEO = _applicationUnitOfWork.Courses.GetById(id);
+
+            CourseBO courseBO = _mapper.Map<CourseBO>(courseEO);
+
+            return courseBO;
+        }
+
+        public IList<CourseBO> GetCourses()
+        {
+            var coursesEO = _applicationUnitOfWork.Courses.GetAll();
+
+            IList<CourseBO> courses = new List<CourseBO>();
+
+            foreach (CourseEO courseEO in coursesEO)
+            {
+                courses.Add(_mapper.Map<CourseBO>(courseEO));
+            }
+
+            return courses;
+        }
+
+
     }
 }

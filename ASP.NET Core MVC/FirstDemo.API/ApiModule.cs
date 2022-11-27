@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using FirstDemo.API.Models;
 
 namespace FirstDemo.API
 {
@@ -7,10 +8,7 @@ namespace FirstDemo.API
         protected override void Load(ContainerBuilder builder)
         {
 
-            //builder.RegisterType<CourseModel>().AsSelf();
-            //builder.RegisterType<CourseCreateModel>().AsSelf();
-            //builder.RegisterType<CourseEditModel>().AsSelf();
-            //builder.RegisterType<CourseListModel>().AsSelf();
+            builder.RegisterType<CourseModel>().AsSelf();
 
             base.Load(builder);
         }
