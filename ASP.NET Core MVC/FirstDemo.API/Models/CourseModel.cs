@@ -58,10 +58,10 @@ namespace FirstDemo.API.Models
             _courseService.EditCourse(course);
         }
 
-        internal CourseBO GetCourse(string name)
-        {
-            return _courseService.GetCourse(name);
-        }
+        //internal CourseBO GetCourse(string name)
+        //{
+        //    return _courseService.GetCourse(name);
+        //}
 
         internal CourseBO GetCourse(Guid id)
         {

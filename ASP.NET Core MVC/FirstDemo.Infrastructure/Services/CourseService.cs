@@ -92,24 +92,24 @@ namespace FirstDemo.Infrastructure.Services
             }
         }
 
-        public CourseBO GetCourse(string name)
-        {
-            var courseEO = _applicationUnitOfWork.Courses.Get(x => x.Title.Equals(name), "")
-                .FirstOrDefault();
+        ////public CourseBO GetCourse(string name)
+        ////{
+        ////    var courseEO = _applicationUnitOfWork.Courses.Get(x => x.Title.Equals(name), "")
+        ////        .FirstOrDefault();
 
-            CourseBO courseBO = _mapper.Map<CourseBO>(courseEO);
+        ////    CourseBO courseBO = _mapper.Map<CourseBO>(courseEO);
 
-            return courseBO;
-        }
+        ////    return courseBO;
+        ////}
 
-        public CourseBO GetCourses(Guid id)
-        {
-            var courseEO = _applicationUnitOfWork.Courses.GetById(id);
+        ////public CourseBO GetCourses(Guid id)
+        ////{
+        ////    var courseEO = _applicationUnitOfWork.Courses.GetById(id);
 
-            CourseBO courseBO = _mapper.Map<CourseBO>(courseEO);
+        ////    CourseBO courseBO = _mapper.Map<CourseBO>(courseEO);
 
-            return courseBO;
-        }
+        ////    return courseBO;
+        ////}
 
         public IList<CourseBO> GetCourses()
         {

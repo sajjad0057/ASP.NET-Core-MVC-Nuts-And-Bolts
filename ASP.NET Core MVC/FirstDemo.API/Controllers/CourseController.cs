@@ -63,13 +63,13 @@ namespace FirstDemo.API.Controllers
             return model.GetCourse(id);
         }
 
-        [HttpGet("{name}")]
-        [Authorize(Policy = "CourseViewRequirementPolicy")]
-        public Course Get(string name)
-        {
-            var model = _scope.Resolve<CourseModel>();
-            return model.GetCourse(name);
-        }
+        //[HttpGet("{name}")]
+        //[Authorize(Policy = "CourseViewRequirementPolicy")]
+        //public Course Get(string name)
+        //{
+        //    var model = _scope.Resolve<CourseModel>();
+        //    return model.GetCourse(name);
+        //}
 
         [HttpPost()]
         public IActionResult Post(CourseModel model)

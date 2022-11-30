@@ -10,8 +10,9 @@ namespace FirstDemo.Infrastructure.Services
         (int total, int totalDisplay, IList<Course> records) GetCourses(int pageIndex, int pageSize, string searchText, string orderby);
 
         IList<Course> GetCourses();
-        Course GetCourse(string name);
-        Course GetCourses(Guid id);
+
+        ////Course GetCourse(string name);
+        ////Course GetCourses(Guid id);
         void DeleteCourse(Guid id);
     }
 }
