@@ -54,7 +54,6 @@ try
 
     #region ForCustomizeIdentityManagement
 
-
     builder.Services
     .AddIdentity<ApplicationUser, ApplicationRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
