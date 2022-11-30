@@ -7,16 +7,15 @@ using FirstDemo.Infrastructure.Securities;
 using FirstDemo.Infrastructure.Services;
 using FirstDemo.Web;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Serilog.Events;
 using System.Reflection;
-
-
-
-
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -113,7 +112,22 @@ try
             options.Cookie.Name = "FirstDemoPortal.Identity";
             options.SlidingExpiration = true;
             options.ExpireTimeSpan = TimeSpan.FromHours(1);
-        });
+        })
+        //// For Configuring JWT Token - 
+        .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, x =>
+        {
+            x.RequireHttpsMetadata = false;
+            x.SaveToken = true;
+            x.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration["Jwt:Key"])),
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                ValidAudience = builder.Configuration["Jwt:Audience"],
+            };
+        }); 
 
 
     builder.Services
@@ -172,12 +186,22 @@ try
             policy.Requirements.Add(new CourseViewRequirement());
         });
 
+        //// For authorized by JWT Token when make request to API project from Web Project - 
+        options.AddPolicy("ApiRequirementPolicy", policy =>
+        {
+            policy.AuthenticationSchemes.Clear();
+            policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
+            policy.RequireAuthenticatedUser();
+            policy.Requirements.Add(new ApiRequirement());
+        });
+
 
     });
 
 
 
     builder.Services.AddSingleton<IAuthorizationHandler, CourseViewRequirementHandler>();
+    builder.Services.AddSingleton<IAuthorizationHandler, ApiRequirementHandler>();
 
     #endregion
 
