@@ -17,6 +17,8 @@ using Serilog.Events;
 using System.Reflection;
 using System.Text;
 
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 #region Serilog (Logger) Configuration 
@@ -186,11 +188,11 @@ try
             policy.Requirements.Add(new CourseViewRequirement());
         });
 
-        //// For authorized by JWT Token when make request to API project from Web Project - 
+        //// For authorized by JWT Token when make request to API Controller in Web Project - 
         options.AddPolicy("ApiRequirementPolicy", policy =>
         {
             policy.AuthenticationSchemes.Clear();
-            policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
+            policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);   //// By this declare this policy authenticated by JWT not by default.
             policy.RequireAuthenticatedUser();
             policy.Requirements.Add(new ApiRequirement());
         });
