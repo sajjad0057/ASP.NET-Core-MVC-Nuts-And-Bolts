@@ -3,12 +3,14 @@ using FirstDemo.API.Models;
 using FirstDemo.Infrastructure.BusinessObjects;
 using FirstDemo.Infrastructure.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FirstDemo.API.Controllers
 {
     [ApiController]
     [Route("api/v3/[controller]")]
+    [EnableCors("AllowSites")]
     public class CourseController : Controller
     {
         private readonly ILifetimeScope _scope;
@@ -24,8 +26,8 @@ namespace FirstDemo.API.Controllers
 
 
 
-        //// Here Query Parameters doesn't pass from postman so it's throw an exception - later we can use it when
-        //// we pass request from real frontend application
+        //// Here Query Parameters doesn't pass from postman so it's throw an exception
+        //// this methods invoke from datatables by web project - 
         [HttpGet, Authorize(Policy = "CourseViewRequirementPolicy")]
         public object Get()
         {

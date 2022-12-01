@@ -134,6 +134,7 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
             var dataTableModel = new DataTablesAjaxRequestModel(Request);  //// Here Request - object is Controller class property.
             var model = _scope.Resolve<CourseListModel>();
             return Json(model.GetPagedCourses(dataTableModel));
+
         }
 
 

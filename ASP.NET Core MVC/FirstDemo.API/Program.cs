@@ -116,6 +116,23 @@ try
     #endregion
 
 
+    #region ForConfiguring CORS
+
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("AllowSites",
+            builder =>
+            {
+                builder.WithOrigins("https://localhost:7060", "https://localhost:7134")
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+            });
+    });
+
+    #endregion
+
+
+
     builder.Services.AddControllers();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
@@ -133,6 +150,9 @@ try
     }
 
     app.UseHttpsRedirection();
+
+    ////For configuring CORS
+    app.UseCors();
 
     app.UseAuthorization();
 
