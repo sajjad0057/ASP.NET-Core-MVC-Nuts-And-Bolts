@@ -200,6 +200,13 @@ try
 
     });
 
+    //// For Configuring Cookie bassed session 
+    builder.Services.AddSession(options =>
+    {
+        options.IdleTimeout = TimeSpan.FromMinutes(30);
+        options.Cookie.HttpOnly = true;
+        options.Cookie.IsEssential = true;
+    });
 
 
     builder.Services.AddSingleton<IAuthorizationHandler, CourseViewRequirementHandler>();
@@ -237,6 +244,9 @@ try
 
     app.UseAuthentication();
     app.UseAuthorization();
+
+    //// for configuring Session -
+    app.UseSession();
 
 
     app.MapControllerRoute(

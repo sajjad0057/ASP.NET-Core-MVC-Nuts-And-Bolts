@@ -1,4 +1,5 @@
-﻿
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
 @{
     ViewData["Title"] = "Index";
 }
@@ -69,7 +70,14 @@
                 "serverSide" : true,
                 //// By this Url , When load this page , ajax hit this URL . for this Fire GetCourseData function in controller -
                 "ajax" : {
-                    "url": "/admin/course/GetCourseData",
+                    //"url": "/admin/course/GetCourseData",
+
+                    //// for retriving course data using API project
+                    "url": "https://localhost:7060/api/v3/Course/",
+                    "headers": {
+                        "Authorization": 'Bearer @HttpContextAccessor.HttpContext.Session.GetString("token")'
+                    },
+
                 },
 
 

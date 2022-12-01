@@ -19,11 +19,11 @@ namespace FirstDemo.API.Controllers
             _logger = logger;
             _scope = scope;
         }
-    
 
 
 
-        /*
+
+
         //// Here Query Parameters doesn't pass from postman so it's throw an exception - later we can use it when
         //// we pass request from real frontend application
         [HttpGet, Authorize(Policy = "CourseViewRequirementPolicy")]
@@ -35,23 +35,23 @@ namespace FirstDemo.API.Controllers
             return data;
         }
 
-        */
 
 
-        [HttpGet, Authorize(Policy = "CourseViewRequirementPolicy")]
-        public IEnumerable<Course> Get()
-        {
-            try
-            {
-                var model = _scope.Resolve<CourseModel>();
-                return model.GetCourses();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Couldn't get courses");
-                return null;
-            }
-        }
+
+        //[HttpGet, Authorize(Policy = "CourseViewRequirementPolicy")]
+        //public IEnumerable<Course> Get()
+        //{
+        //    try
+        //    {
+        //        var model = _scope.Resolve<CourseModel>();
+        //        return model.GetCourses();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "Couldn't get courses");
+        //        return null;
+        //    }
+        //}
 
 
 

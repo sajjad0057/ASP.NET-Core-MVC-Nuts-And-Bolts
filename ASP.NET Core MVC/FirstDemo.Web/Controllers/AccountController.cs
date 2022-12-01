@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using FirstDemo.Infrastructure.Entities;
+using FirstDemo.Infrastructure.Services;
 using FirstDemo.Web.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -21,19 +22,23 @@ namespace FirstDemo.Web.Controllers
         private readonly ILogger<AccountController> _logger;
         private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly ILifetimeScope _scope;
+        private readonly ITokenService _tokenService;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<AccountController> logger,
             RoleManager<ApplicationRole> roleManager,
-            ILifetimeScope scope)
+            ILifetimeScope scope,
+            ITokenService tokenService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _roleManager = roleManager;
             _scope = scope;
+            _tokenService = tokenService;
+
         }
 
 
@@ -166,6 +171,14 @@ namespace FirstDemo.Web.Controllers
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+
+                    //// for storing JWT token in Sessions -
+                    var user = await _userManager.FindByEmailAsync(model.Email);
+                    var claims = (await _userManager.GetClaimsAsync(user)).ToArray();
+                    var token = await _tokenService.GetJwtToken(claims);
+                    HttpContext.Session.SetString("token", token);
+
+
                     return LocalRedirect(model.ReturnUrl);
                 }
                 if (result.RequiresTwoFactor)
