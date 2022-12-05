@@ -24,10 +24,11 @@ namespace FirstDemo.Infrastructure.Services
 
             message.Subject = subject;
 
-            message.Body = new TextPart("plain")
-            {
-                Text = body
-            };
+            var builder = new BodyBuilder();
+
+            builder.HtmlBody = body;
+
+            message.Body = builder.ToMessageBody();
 
             using (var client = new SmtpClient())
             {

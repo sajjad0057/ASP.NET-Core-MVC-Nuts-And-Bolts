@@ -105,16 +105,9 @@ namespace FirstDemo.Web.Controllers
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
 
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new
-                        {
-                            area = "",
-                            userId = user.Id,
-                            code = code,
-                            returnUrl = model.ReturnUrl
-                        },
+                    var callbackUrl = Url.Action("ConfirmEmail",
+                        "Account",
+                        values: new { area = "", userId = user.Id, code = code, returnUrl = model.ReturnUrl },
                         protocol: Request.Scheme);
 
                     _emailService.SendSingleEmail(model.FirstName + " " + model.LastName, model.Email,
@@ -223,6 +216,13 @@ namespace FirstDemo.Web.Controllers
         [AllowAnonymous]
         public IActionResult AccessDenied()
         {
+            return View();
+        }
+
+        [AllowAnonymous]
+        public IActionResult ConfirmEmail()
+        {
+            ///// Write here database updateable code for mailconfirmations - 
             return View();
         }
 
