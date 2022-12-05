@@ -36,7 +36,8 @@ namespace FirstDemo.Web.Areas.Admin.Models
 
         public override void ResolveDependency(ILifetimeScope scope)
         {
-            base.ResolveDependency(scope);
+            base.ResolveDependency(scope);     ////Resolving Dependency in BaseModel class .
+                                               
             _courseService = _scope.Resolve<ICourseService>();
             _mapper = _scope.Resolve<IMapper>();
         }

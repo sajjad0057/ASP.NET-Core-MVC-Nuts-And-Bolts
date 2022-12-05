@@ -28,32 +28,32 @@ namespace FirstDemo.API.Controllers
 
         //// Here Query Parameters doesn't pass from postman so it's throw an exception
         //// this methods invoke from datatables by web project - 
-        [HttpGet, Authorize(Policy = "CourseViewRequirementPolicy")]
-        public object Get()
-        {
-            var dataTablesModel = new DataTablesAjaxRequestModel(Request);
-            var model = _scope.Resolve<CourseModel>();
-            var data = model.GetPagedCourses(dataTablesModel);
-            return data;
-        }
-
-
-
-
         //[HttpGet, Authorize(Policy = "CourseViewRequirementPolicy")]
-        //public IEnumerable<Course> Get()
+        //public object Get()
         //{
-        //    try
-        //    {
-        //        var model = _scope.Resolve<CourseModel>();
-        //        return model.GetCourses();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError(ex, "Couldn't get courses");
-        //        return null;
-        //    }
+        //    var dataTablesModel = new DataTablesAjaxRequestModel(Request);
+        //    var model = _scope.Resolve<CourseModel>();
+        //    var data = model.GetPagedCourses(dataTablesModel);
+        //    return data;
         //}
+
+
+
+
+        [HttpGet, Authorize(Policy = "CourseViewRequirementPolicy")]
+        public IEnumerable<Course> Get()
+        {
+            try
+            {
+                var model = _scope.Resolve<CourseModel>();
+                return model.GetCourses();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Couldn't get courses");
+                return null;
+            }
+        }
 
 
 
