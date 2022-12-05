@@ -23,6 +23,7 @@ namespace FirstDemo.Web.Controllers
         private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly ILifetimeScope _scope;
         private readonly ITokenService _tokenService;
+        private readonly IEmailService _emailService;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
@@ -30,7 +31,8 @@ namespace FirstDemo.Web.Controllers
             ILogger<AccountController> logger,
             RoleManager<ApplicationRole> roleManager,
             ILifetimeScope scope,
-            ITokenService tokenService)
+            ITokenService tokenService,
+            IEmailService emailService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -38,7 +40,7 @@ namespace FirstDemo.Web.Controllers
             _roleManager = roleManager;
             _scope = scope;
             _tokenService = tokenService;
-
+            _emailService = emailService;
         }
 
 
@@ -114,8 +116,9 @@ namespace FirstDemo.Web.Controllers
                         },
                         protocol: Request.Scheme);
 
-                    ////await _emailSender.SendEmailAsync(model.Email, "Confirm your email",
-                    ////    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    await _emailService.SendSingleEmail(model.FirstName + " " + model.LastName, model.Email,
+                        "Confirm your email",
+                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

@@ -50,20 +50,19 @@ namespace FirstDemo.Infrastructure
             builder.RegisterType<CourseService>().As<ICourseService>()
                 .InstancePerLifetimeScope();
 
-
             builder.RegisterType<TimeService>().As<ITimeService>()
                 .InstancePerLifetimeScope();
 
-
             builder.RegisterType<DataUtility>().As<IDataUtility>()
                 .InstancePerLifetimeScope();
-
 
             ////For FirstDemo.API project - 
 
             builder.RegisterType<TokenService>().As<ITokenService>()
                 .InstancePerLifetimeScope();
 
+            builder.RegisterType<HtmlEmailServive>().As<IEmailService>()
+                .InstancePerLifetimeScope();
 
 
 

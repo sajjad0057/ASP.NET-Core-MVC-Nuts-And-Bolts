@@ -1,6 +1,7 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using FirstDemo.Infrastructure;
+using FirstDemo.Infrastructure.BusinessObjects;
 using FirstDemo.Infrastructure.DbContexts;
 using FirstDemo.Infrastructure.Entities;
 using FirstDemo.Infrastructure.Securities;
@@ -215,6 +216,8 @@ try
     #endregion
 
 
+    ////Load data from appsettings into a objects -
+    builder.Services.Configure<Smtp>(builder.Configuration.GetSection("Smtp"));
 
     builder.Services.AddControllersWithViews();
 
