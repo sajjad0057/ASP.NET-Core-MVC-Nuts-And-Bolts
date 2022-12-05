@@ -1,5 +1,7 @@
 ﻿using FirstDemo.Infrastructure.BusinessObjects;
 using MailKit.Net.Smtp;
+using MailKit.Security;
+using Microsoft.Extensions.Options;
 using MimeKit;
 
 namespace FirstDemo.Infrastructure.Services
@@ -7,11 +9,11 @@ namespace FirstDemo.Infrastructure.Services
     public class HtmlEmailServive : IEmailService
     {
         private readonly Smtp _emailSettings;
-        public HtmlEmailServive(Smtp emailSettins)
+        public HtmlEmailServive(IOptions<Smtp> emailSettings)
         {
-            _emailSettings = emailSettins;
+            _emailSettings = emailSettings.Value;
         }
-        public async Task SendSingleEmail(string receiverName,string receiverEmail, string subject, string body)
+        public void SendSingleEmail(string receiverName,string receiverEmail, string subject, string body)
         {
             var message = new MimeMessage();
 
@@ -29,12 +31,11 @@ namespace FirstDemo.Infrastructure.Services
 
             using (var client = new SmtpClient())
             {
-                client.ConnectAsync(_emailSettings.Host, _emailSettings.Port, _emailSettings.UseSSL);
-                // Note: only needed if the SMTP server requires authentication
-                client.AuthenticateAsync(_emailSettings.Username,_emailSettings.Password);
-
-                client.SendAsync(message);
-                client.DisconnectAsync(true);
+                client.Connect(_emailSettings.Host, _emailSettings.Port, SecureSocketOptions.StartTls);
+                client.Timeout = 30000;
+                client.Authenticate(_emailSettings.Username, _emailSettings.Password);
+                client.Send(message);
+                client.Disconnect(true);
             }
         }
     }

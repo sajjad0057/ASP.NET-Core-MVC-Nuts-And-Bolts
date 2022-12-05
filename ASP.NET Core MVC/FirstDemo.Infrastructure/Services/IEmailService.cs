@@ -8,7 +8,7 @@ namespace FirstDemo.Infrastructure.Services
 {
     public interface IEmailService
     {
-        Task SendSingleEmail(string receiverName, string receiverEmail, string subject, string body);
+        void SendSingleEmail(string receiverName, string receiverEmail, string subject, string body);
 
     }
 }
