@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirstDemo.Web", "FirstDemo.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirstDemo.Infrastructure", "FirstDemo.Infrastructure\FirstDemo.Infrastructure.csproj", "{6D30A7CC-897B-459A-AE3B-4B35D7CE4A4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstDemo.API", "FirstDemo.API\FirstDemo.API.csproj", "{F0912D37-0C0A-4A2D-B5AE-F72C1B04F502}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirstDemo.API", "FirstDemo.API\FirstDemo.API.csproj", "{F0912D37-0C0A-4A2D-B5AE-F72C1B04F502}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstDemo.Worker", "FirstDemo.Worker\FirstDemo.Worker.csproj", "{8F546761-3329-4F7A-BA4E-4D6FA766E184}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{F0912D37-0C0A-4A2D-B5AE-F72C1B04F502}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F0912D37-0C0A-4A2D-B5AE-F72C1B04F502}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F0912D37-0C0A-4A2D-B5AE-F72C1B04F502}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F546761-3329-4F7A-BA4E-4D6FA766E184}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F546761-3329-4F7A-BA4E-4D6FA766E184}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F546761-3329-4F7A-BA4E-4D6FA766E184}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F546761-3329-4F7A-BA4E-4D6FA766E184}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
