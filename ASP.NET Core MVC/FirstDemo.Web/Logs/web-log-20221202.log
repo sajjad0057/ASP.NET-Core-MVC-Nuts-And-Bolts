@@ -1,0 +1,51 @@
+2022-12-02 01:54:04.296 +06:00 [INF] Application Starting .
+2022-12-02 01:54:18.515 +06:00 [INF] I am in index page .
+2022-12-02 01:54:44.892 +06:00 [INF] User logged in.
+2022-12-02 01:54:45.499 +06:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Session has not been configured for this application or request.
+   at Microsoft.AspNetCore.Http.DefaultHttpContext.get_Session()
+   at FirstDemo.Web.Controllers.AccountController.Login(LoginModel model) in G:\ASP.NET-Core-MVC-Nuts-And-Bolts\ASP.NET Core MVC\FirstDemo.Web\Controllers\AccountController.cs:line 179
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2022-12-02 02:02:02.260 +06:00 [INF] Application Starting .
+2022-12-02 02:02:07.178 +06:00 [INF] I am in index page .
+2022-12-02 02:02:28.518 +06:00 [INF] User logged in.
+2022-12-02 02:02:28.903 +06:00 [INF] I am in index page .
+2022-12-02 02:04:19.208 +06:00 [INF] I am in index page .
+2022-12-02 02:21:29.859 +06:00 [INF] Application Starting .
+2022-12-02 02:21:33.782 +06:00 [INF] I am in index page .
+2022-12-02 02:22:12.716 +06:00 [INF] User logged in.
+2022-12-02 02:22:13.140 +06:00 [INF] I am in index page .
+2022-12-02 02:24:52.406 +06:00 [INF] Application Starting .
+2022-12-02 02:24:56.354 +06:00 [INF] I am in index page .
+2022-12-02 02:25:04.057 +06:00 [INF] User logged in.
+2022-12-02 02:25:04.490 +06:00 [INF] I am in index page .
+2022-12-02 02:27:48.330 +06:00 [INF] Application Starting .
+2022-12-02 02:27:53.158 +06:00 [INF] I am in index page .
+2022-12-02 02:28:25.222 +06:00 [INF] User logged in.
+2022-12-02 02:28:25.553 +06:00 [INF] I am in index page .
+2022-12-02 02:36:30.361 +06:00 [INF] Application Starting .
+2022-12-02 02:36:33.624 +06:00 [INF] I am in index page .
+2022-12-02 02:36:46.193 +06:00 [INF] User logged in.
+2022-12-02 02:40:17.143 +06:00 [INF] Application Starting .
+2022-12-02 02:40:21.565 +06:00 [INF] I am in index page .
+2022-12-02 02:40:30.186 +06:00 [INF] User logged in.
+2022-12-02 02:40:30.620 +06:00 [INF] I am in index page .
+2022-12-02 02:41:13.258 +06:00 [INF] Application Starting .
+2022-12-02 02:41:16.624 +06:00 [INF] I am in index page .
+2022-12-02 02:41:26.654 +06:00 [INF] User logged in.
+2022-12-02 02:41:26.982 +06:00 [INF] I am in index page .

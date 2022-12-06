@@ -1,0 +1,14 @@
+G:\ASP.NET-Core-MVC-Nuts-And-Bolts\ASP.NET Core MVC\FirstDemo.Infrastructure\bin\Debug\net6.0\FirstDemo.Infrastructure.deps.json
+G:\ASP.NET-Core-MVC-Nuts-And-Bolts\ASP.NET Core MVC\FirstDemo.Infrastructure\bin\Debug\net6.0\FirstDemo.Infrastructure.runtimeconfig.json
+G:\ASP.NET-Core-MVC-Nuts-And-Bolts\ASP.NET Core MVC\FirstDemo.Infrastructure\bin\Debug\net6.0\FirstDemo.Infrastructure.dll
+G:\ASP.NET-Core-MVC-Nuts-And-Bolts\ASP.NET Core MVC\FirstDemo.Infrastructure\bin\Debug\net6.0\FirstDemo.Infrastructure.pdb
+G:\ASP.NET-Core-MVC-Nuts-And-Bolts\ASP.NET Core MVC\FirstDemo.Infrastructure\obj\Debug\net6.0\FirstDemo.Infrastructure.csproj.AssemblyReference.cache
+G:\ASP.NET-Core-MVC-Nuts-And-Bolts\ASP.NET Core MVC\FirstDemo.Infrastructure\obj\Debug\net6.0\FirstDemo.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+G:\ASP.NET-Core-MVC-Nuts-And-Bolts\ASP.NET Core MVC\FirstDemo.Infrastructure\obj\Debug\net6.0\FirstDemo.Infrastructure.AssemblyInfoInputs.cache
+G:\ASP.NET-Core-MVC-Nuts-And-Bolts\ASP.NET Core MVC\FirstDemo.Infrastructure\obj\Debug\net6.0\FirstDemo.Infrastructure.AssemblyInfo.cs
+G:\ASP.NET-Core-MVC-Nuts-And-Bolts\ASP.NET Core MVC\FirstDemo.Infrastructure\obj\Debug\net6.0\FirstDemo.Infrastructure.csproj.CoreCompileInputs.cache
+G:\ASP.NET-Core-MVC-Nuts-And-Bolts\ASP.NET Core MVC\FirstDemo.Infrastructure\obj\Debug\net6.0\FirstDemo.Infrastructure.dll
+G:\ASP.NET-Core-MVC-Nuts-And-Bolts\ASP.NET Core MVC\FirstDemo.Infrastructure\obj\Debug\net6.0\refint\FirstDemo.Infrastructure.dll
+G:\ASP.NET-Core-MVC-Nuts-And-Bolts\ASP.NET Core MVC\FirstDemo.Infrastructure\obj\Debug\net6.0\FirstDemo.Infrastructure.pdb
+G:\ASP.NET-Core-MVC-Nuts-And-Bolts\ASP.NET Core MVC\FirstDemo.Infrastructure\obj\Debug\net6.0\FirstDemo.Infrastructure.genruntimeconfig.cache
+G:\ASP.NET-Core-MVC-Nuts-And-Bolts\ASP.NET Core MVC\FirstDemo.Infrastructure\obj\Debug\net6.0\ref\FirstDemo.Infrastructure.dll

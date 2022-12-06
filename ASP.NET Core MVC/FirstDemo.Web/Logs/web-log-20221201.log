@@ -1,0 +1,40 @@
+2022-12-01 04:39:16.934 +06:00 [INF] Application Starting .
+2022-12-01 04:39:23.962 +06:00 [INF] I am in index page .
+2022-12-01 04:39:38.884 +06:00 [INF] I am in index page .
+2022-12-01 04:44:37.447 +06:00 [INF] Application Starting .
+2022-12-01 04:44:39.848 +06:00 [INF] I am in index page .
+2022-12-01 04:49:44.904 +06:00 [INF] Application Starting .
+2022-12-01 04:49:48.073 +06:00 [INF] I am in index page .
+2022-12-01 04:53:24.015 +06:00 [INF] Application Starting .
+2022-12-01 04:53:26.520 +06:00 [INF] I am in index page .
+2022-12-01 04:54:50.291 +06:00 [INF] Application Starting .
+2022-12-01 04:54:52.554 +06:00 [INF] I am in index page .
+2022-12-01 04:56:07.747 +06:00 [INF] Application Starting .
+2022-12-01 04:56:10.012 +06:00 [INF] I am in index page .
+2022-12-01 04:58:46.057 +06:00 [INF] User logged in.
+2022-12-01 04:58:46.070 +06:00 [INF] I am in index page .
+2022-12-01 05:01:38.690 +06:00 [INF] Application Starting .
+2022-12-01 05:01:41.206 +06:00 [INF] I am in index page .
+2022-12-01 05:13:42.773 +06:00 [INF] Application Starting .
+2022-12-01 05:13:45.391 +06:00 [INF] I am in index page .
+2022-12-01 23:48:54.244 +06:00 [INF] Application Starting .
+2022-12-01 23:48:57.396 +06:00 [INF] I am in index page .
+2022-12-01 23:49:44.186 +06:00 [INF] User logged in.
+2022-12-01 23:49:44.206 +06:00 [INF] I am in index page .
+2022-12-01 23:57:02.546 +06:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Multiple constructors accepting all given argument types have been found in type 'FirstDemo.Web.Controllers.ValuesController'. There should only be one applicable constructor.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.TryFindMatchingConstructor(Type instanceType, Type[] argumentTypes, ConstructorInfo& matchingConstructor, Nullable`1[]& parameterMap)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.FindApplicableConstructor(Type instanceType, Type[] argumentTypes, ConstructorInfo& matchingConstructor, Nullable`1[]& matchingParameterMap)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateFactory(Type instanceType, Type[] argumentTypes)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.CreateActivator(ControllerActionDescriptor descriptor)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.CreateControllerFactory(ControllerActionDescriptor descriptor)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvokerCache.GetCachedResult(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Routing.ControllerRequestDelegateFactory.<>c__DisplayClass12_0.<CreateRequestDelegate>b__0(HttpContext context)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2022-12-01 23:57:57.042 +06:00 [INF] Application Starting .
+2022-12-01 23:57:59.878 +06:00 [INF] I am in index page .

@@ -32,7 +32,7 @@ try
     #region ForResolving_DependencyInjection_using_Autofac
 
     IHost host = Host.CreateDefaultBuilder(args)
-        .UseWindowsService()
+        .UseWindowsService()     ///// use this method for installation this service in windows like WindowsService .
         .UseServiceProviderFactory(new AutofacServiceProviderFactory())
         .UseSerilog()
         .ConfigureContainer<ContainerBuilder>(builder =>
