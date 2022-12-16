@@ -74,7 +74,6 @@ try
     #endregion
 
 
-
     builder.Services.AddDbContext<ApplicationDbContext>(options =>
         options.UseSqlServer(connectionString, m => m.MigrationsAssembly(assemblyName)));
     builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -220,6 +219,12 @@ try
     builder.Services.Configure<Smtp>(builder.Configuration.GetSection("Smtp"));
 
     builder.Services.AddControllersWithViews();
+
+    #region ForRunningDockerImages
+
+    builder.WebHost.UseUrls("http://*:80");
+
+    #endregion
 
     var app = builder.Build();
 
