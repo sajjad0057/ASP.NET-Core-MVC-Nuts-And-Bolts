@@ -1,0 +1,17 @@
+version: "3"
+services:
+    web:
+        image: firstdemob7
+        container_name: first_demo_web
+        restart: unless-stopped
+        env_file: 
+            - web.env
+        ports:
+            - "8000:80"
+        volumes:
+            - firstdemob7-data:/app/Logs/
+volumes:
+    firstdemob7-data:
+        external: true
+
+     
