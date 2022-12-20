@@ -5,6 +5,12 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoTesting", "DemoTesting\DemoTesting.csproj", "{A13A1F2F-F7B5-49E3-AE72-9D40372E8B37}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoLib", "DemoLib\DemoLib.csproj", "{7EE83C03-1864-4DF2-9068-8E1D54D640E2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{F3660974-C452-49EA-A8D6-2E365770BA71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoLib.Tests", "DemoLib.Tests\DemoLib.Tests.csproj", "{D1A159A3-53B4-43A9-9B4B-3B2A7125189D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +21,20 @@ Global
 		{A13A1F2F-F7B5-49E3-AE72-9D40372E8B37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A13A1F2F-F7B5-49E3-AE72-9D40372E8B37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A13A1F2F-F7B5-49E3-AE72-9D40372E8B37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EE83C03-1864-4DF2-9068-8E1D54D640E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EE83C03-1864-4DF2-9068-8E1D54D640E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EE83C03-1864-4DF2-9068-8E1D54D640E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EE83C03-1864-4DF2-9068-8E1D54D640E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1A159A3-53B4-43A9-9B4B-3B2A7125189D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1A159A3-53B4-43A9-9B4B-3B2A7125189D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1A159A3-53B4-43A9-9B4B-3B2A7125189D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1A159A3-53B4-43A9-9B4B-3B2A7125189D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D1A159A3-53B4-43A9-9B4B-3B2A7125189D} = {F3660974-C452-49EA-A8D6-2E365770BA71}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8B9365B8-5E23-47AB-83FD-1053437405B4}
