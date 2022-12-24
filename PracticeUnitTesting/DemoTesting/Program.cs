@@ -1,5 +1,4 @@
-﻿
-using DemoLib;
+﻿using DemoLib;
 
 string line = Console.ReadLine();
 

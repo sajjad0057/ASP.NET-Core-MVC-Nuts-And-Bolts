@@ -10,6 +10,11 @@ namespace DemoLib
 {
     public class EmailSender : IEmailSender
     {
+        public int GetEmailSeen(string campaignName)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Send(string email)
         {
             var message = new MimeMessage();

@@ -1,5 +1,6 @@
 using Autofac.Extras.Moq;
 using Moq;
+using DemoLib;
 using NUnit.Framework;
 using Shouldly;
 
@@ -38,7 +39,7 @@ namespace DemoLib.Tests
 
 
         [Test,Category("UnitTest")]
-        public void Sum_ValidNumbers_ValidSum()
+        public void CreateAccount_ValidEmail_SendsEmail()
         {
             string username = "sajjadhossain";
             string password = "1234";
@@ -47,6 +48,23 @@ namespace DemoLib.Tests
             _emailSender.Setup(x => x.Send(email)).Verifiable();
 
             _accountService.CreateAccount(username, password, email);
+
+            _emailSender.VerifyAll();
+        }
+
+
+
+        [Test, Category("UnitTest")]
+        public void GetCampaignReport_ValidCampaignName_SendsEmail()
+        {
+            string campaignName = "";
+
+            string email = "sajjad@gmail.com";
+
+            _emailSender.Setup(x => x.GetEmailSeen(campaignName)).Returns(5).Verifiable();
+            _emailSender.Setup(x => x.Send(email)).Verifiable();
+
+            _accountService.GetCampaignReport(campaignName);
 
             _emailSender.VerifyAll();
         }
