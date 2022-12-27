@@ -105,6 +105,13 @@ namespace FirstDemo.Infrastructure.Tests
             _courseRepositoryMock.Setup(x => x.GetCount(
                 It.IsAny<Expression<Func<CourseEO, bool>>>())).Returns(1);
 
+            _mapperMock.Setup(x => x.Map<CourseEO>(course))
+                .Returns(new CourseEO() { Title= course.Name });
+
+            _applicationtUnitOfWork.Setup(x => x.Save()).Verifiable();
+            _courseRepositoryMock.Setup(x => x.Add(It.Is<CourseEO>(y => y.Title == course.Name)))
+                .Verifiable();
+
             // Act
             Should.Throw<DuplicateException>(
                 () => _courseService.CreateCourse(course)
