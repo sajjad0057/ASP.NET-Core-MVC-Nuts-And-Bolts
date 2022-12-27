@@ -69,13 +69,14 @@ namespace FirstDemo.Infrastructure.Tests
                 .Returns(_courseRepositoryMock.Object);
 
             _courseRepositoryMock.Setup(x => x.GetCount(
-                It.Is<Expression<Func<CourseEO, bool>>>(y => y.Compile()(courseEntity))))
+                It.Is<Expression<Func<CourseEO, bool>>>(y=>y.Compile()(courseEntity))))
                 .Returns(0).Verifiable();
 
             _mapperMock.Setup(x => x.Map<CourseEO>(course))
                 .Returns(courseEntity).Verifiable();
 
             _applicationtUnitOfWork.Setup(x => x.Save()).Verifiable();
+
             _courseRepositoryMock.Setup(x => x.Add(It.Is<CourseEO>(y => y.Title == course.Name)))
                 .Verifiable();
 
