@@ -8,11 +8,11 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ButtonComponent implements OnInit {
   @Input() text:string;
-  @Input() color:string;
+  @Input() redBg:string;
 
   constructor(){
     this.text = "";
-    this.color = ""
+    this.redBg = ""
   }
 
   ngOnInit(): void {
