@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 
 @Component({
@@ -9,6 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ButtonComponent implements OnInit {
   @Input() text:string;
   @Input() redBg:string;
+  @Output() btnClick = new EventEmitter();
 
   constructor(){
     this.text = "";
@@ -20,6 +21,6 @@ export class ButtonComponent implements OnInit {
   }
 
   onClick(){
-    console.log("button clicked !")
+    this.btnClick.emit();
   }
 }
