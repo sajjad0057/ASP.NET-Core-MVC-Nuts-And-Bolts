@@ -123,7 +123,7 @@ try
         options.AddPolicy("AllowSites",
             builder =>
             {
-                builder.WithOrigins("https://localhost:7060", "https://localhost:7134")
+                builder.AllowAnyOrigin()
                    .AllowAnyMethod()
                    .AllowAnyHeader();
             });
