@@ -15,8 +15,14 @@ export class AppComponent {
   constructor(private courseService:CourseService){ 
   }
 
-  update(){
-    this.courses = this.courseService.getCourses();
+  getCourses(){
+	  this.courseService.getToken().subscribe((token:string) =>
+  	(
+    	this.courseService.getCourses(token).subscribe((data:ICourse[]) =>
+      	(this.courses = data)
+    	)
+  	)
+	);   
   }
 
   printMessage1(){

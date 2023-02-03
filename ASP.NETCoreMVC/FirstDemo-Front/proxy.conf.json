@@ -1,0 +1,9 @@
+{
+    "/api/v3/*": {
+    "target": "https://localhost:7060",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+    }
+    }
+    
